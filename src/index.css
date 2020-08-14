@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.page-header {
+.App .page-header {
   background-color: #B2AFAB;
   background-position: center center;
   background-size: cover;
@@ -27,4 +27,5 @@ code {
   justify-content: center; }
 
 .btn-round {
-  border-radius: 30px; }
+  border-radius: 30px; 
+  background-color: orange}
