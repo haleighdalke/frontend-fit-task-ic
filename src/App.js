@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
-
 import { BrowserRouter, Route } from 'react-router-dom';
 
 export default class App extends React.Component {
