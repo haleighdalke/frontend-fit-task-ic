@@ -1,5 +1,8 @@
 import React from 'react';
+
 import './App.css';
+import User from './components/User';
+import HabitContainer from './containers/HabitContainer';
 import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -27,6 +30,8 @@ export default class App extends React.Component {
   }
 
   render(){
+//     HabitContainer: <HabitContainer/>
+//     User: <User/>  
     return (
     <div className="App">
       <BrowserRouter>
