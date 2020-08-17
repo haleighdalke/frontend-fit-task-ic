@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LandingPage from './containers/LandingPage';
+import LoginSignUp from './components/LoginSignUp';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-function App() {
-  return (
+export default class App extends React.Component {
+
+  renderLogin = () => {
+    return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
+  }
+
+  renderSignUp = () => {
+    return <LoginSignUp login={false} handleSignUp={this.handleSignUp}/>
+  }
+
+  handleLogin = ({username, password}) => {
+    console.log('username', username)
+    console.log('password', password)
+  }
+
+  handleSignUp = ({username, password, age, location}) => {
+    console.log('username', username)
+    console.log('password', password)
+    console.log('age', age)
+    console.log('location', location)
+  }
+
+  render(){
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Route path="/" exact component={LandingPage}/>
+        <Route path="/login" render={this.renderLogin}/>
+        <Route path="/signup" render={this.renderSignUp}/>
+      </BrowserRouter>
     </div>
-  );
+  )};
 }
-
-export default App;
