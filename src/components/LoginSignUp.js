@@ -3,7 +3,7 @@ import { Button, Card, Form, Input, Container, Col } from "reactstrap";
 
 export default class LoginSignUp extends React.Component {
     state = {
-        username: "",
+        name: "",
         password: "",
         age: null,
         location: ""
@@ -21,13 +21,13 @@ export default class LoginSignUp extends React.Component {
                 e.preventDefault()
                 this.props.handleSignUp(this.state)
             }}>
-                <label>Username </label>
-                <Input name="username" placeholder="Username" type="text" onChange={this.handleOnChange}/><br/>
+                <label>Name </label>
+                <Input name="name" placeholder="Name" type="text" onChange={this.handleOnChange}/><br/>
                 <label>Password </label>
                 <Input name="password" placeholder="Password" type="password" onChange={this.handleOnChange}/><br/>
                 <label>Age </label>
                 <Input name="age" placeholder="Age" type="number" onChange={this.handleOnChange}/><br/>
-                <label>Password </label>
+                <label>Location </label>
                 <Input name="location" placeholder="Location" type="text" onChange={this.handleOnChange}/><br/><br/>
                 <Button block className="btn-round" color="danger" type="submit">Sign Up</Button>
                 <Button block className="btn-round" color="danger" onClick={() => window.location = "/"}>Go Back</Button>
@@ -41,9 +41,9 @@ export default class LoginSignUp extends React.Component {
                 e.preventDefault()
                 this.props.handleLogin(this.state)
             }}>
-                <label>Username: </label>
-                <Input name="username" placeholder="Username" type="text" onChange={this.handleOnChange}/><br/>
-                <label>Password: </label>
+                <label>Name </label>
+                <Input name="name" placeholder="Name" type="text" onChange={this.handleOnChange}/><br/>
+                <label>Password </label>
                 <Input name="password" placeholder="Password" type="password" onChange={this.handleOnChange}/><br/><br/>
                 <Button block className="btn-round" color="danger">Login</Button>
                 <Button block className="btn-round" color="danger" onClick={() => window.location = "/"}>Go Back</Button>
@@ -61,7 +61,6 @@ export default class LoginSignUp extends React.Component {
                     {this.props.login ? this.generateLoginForm() : this.generateSignUpForm()}
                 </Card>
                 </Col>
-
             </Container>
         </div>
         )};

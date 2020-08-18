@@ -12,7 +12,7 @@ const LandingPage = () => {
             <h3>Set your goals and keep yourself in check!</h3>
             <br />
             <Button className="btn-round" onClick={() => history.push('/login')}>Login</Button>
-            <Button className="btn-round" onClick={() => history.push('/signup')}>Signup</Button>
+            <Button className="btn-round" onClick={() => history.push('/signup')}>Sign Up</Button>
         </Container>
       </div>
   );
