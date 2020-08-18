@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import User from './components/User';
 import HabitContainer from './containers/HabitContainer';
 import LandingPage from './containers/LandingPage';
@@ -17,7 +18,8 @@ class App extends React.Component {
       age: "",
       location: ""
     },
-    goals: [],
+    goals: null,
+    habits: null,
     token: ""
   }
 
@@ -41,7 +43,7 @@ class App extends React.Component {
   }
 
   renderMainContent = () => {
-    return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals}/>
+    return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals} habits={this.state.habits}/>
   }
 
   handleAuthResponse = (json) => {
@@ -55,6 +57,7 @@ class App extends React.Component {
           location: json.user.data.attributes.location
         },
         goals: json.user.data.attributes.goals,
+        habits: json.user.data.attributes.habits,
         token: json.token
       }, () => this.props.history.push('/main'))
     }
