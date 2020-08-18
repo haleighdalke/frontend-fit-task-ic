@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import ChartContainer from './ChartContainer';
 
 class MainContent extends React.Component {
   
@@ -14,6 +15,7 @@ class MainContent extends React.Component {
                 localStorage.clear()
                 this.props.history.push('/')
                 }}>Log Out</button>
+            <ChartContainer/>
         </div>
     )}
 }
