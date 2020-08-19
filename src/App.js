@@ -2,14 +2,10 @@ import React from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import User from './components/User';
-import HabitContainer from './containers/HabitContainer';
-import GoalContainer from './containers/HabitContainer';
 import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import ChartContainer from './containers/ChartContainer';
 
 class App extends React.Component {
 
@@ -36,6 +32,88 @@ class App extends React.Component {
       .then(json => this.handleAuthResponse(json))
   }
 }
+
+  // CREATING METHODS
+  addHabit = (newHabit) => {
+    fetch(`http://localhost:3000/habits`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(newHabit),
+    }) 
+    .then(r => r.json())
+    .then(json => {
+        console.log(json)
+        let habits = this.state.habits.map(habit => {
+            if(habit.id === json.data.id){
+                let newHabit = {
+                    id: json.data.id,
+                    activity: json.data.attributes.activity,
+                    activity_type: json.data.attributes.activity_type
+                }
+                return newHabit
+            }else{
+                return habit
+            }
+        })
+        //update state and reset for forms
+        this.setState({
+            habits: habits,
+            activity: "",
+            activity_type: "",
+            habitAdd: true
+    })})
+        // this.setState({habits: [...this.state.habits, {
+        //     id: json.data.id,
+        //     activity: json.data.attributes.activity,
+        //     activity_type: json.data.attributes.activity_type
+        // }]})
+}
+
+  addGoal = () => {
+    
+  }
+
+  // UPDATING METHODS
+  updateHabit = (habit) => {
+    // console.log(this.state.id)
+    fetch(`http://localhost:3000/habits/${this.state.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(habit)
+    })
+    .then(res => res.json())
+    .then(json => {
+        console.log(json)
+        let habits = this.state.habits.map(habit => {
+            if(habit.id === json.data.id){
+                let newHabit = {
+                    id: json.data.id,
+                    activity: json.data.attributes.activity,
+                    activity_type: json.data.attributes.activity_type
+                }
+                return newHabit
+            }else{
+                return habit
+            }
+        })
+        //update state and reset for forms
+        this.setState({
+            habits: habits,
+            activity: "",
+            activity_type: "",
+            habitAdd: true
+    })})
+}
+
+  updateGoal = () => {}
+
+  // RENDER METHODS
   renderLogin = () => {
     return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
   }
@@ -45,9 +123,20 @@ class App extends React.Component {
   }
 
   renderMainContent = () => {
-    return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals} habits={this.state.habits}/>
+    return <MainContent 
+              user={this.state.user} 
+              token={this.state.token} 
+              goals={this.state.goals} 
+              habits={this.state.habits}
+              addHabit={this.addHabit}
+              updateHabit={this.updateHabit}
+              addGoal={this.addGoal}
+              updateGoal={this.updateGoal}
+              />
   }
 
+
+  // AUTHENTICATION
   handleAuthResponse = (json) => {
     if (json.user){
       localStorage.token = json.token
@@ -112,6 +201,7 @@ class App extends React.Component {
       }
       })
     }
+
 
   render(){
 //     HabitContainer: <HabitContainer/>

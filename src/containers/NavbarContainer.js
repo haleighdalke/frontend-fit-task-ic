@@ -18,44 +18,80 @@ class NavbarContainer extends React.Component {
             modalShow: !this.state.modalShow
         })
     }
+
+    // RENDER METHODS
+    renderLogo = () => {
+        return (
+            <div className="logo">
+                <img src={logo} alt="Fit-task-ic" />
+            </div>
+        )
+    }
+
+    renderUserInfo = (user) => {
+        return (
+            <div className="user-info">
+                <h3>- {user.name} | {user.age} | {user.location} -</h3>
+            </div>
+        )
+    }
+
+    renderSidenavOptions = (habits, goals, addHabit, addGoal, updateHabit, updateGoal) => {
+        return (
+            <div className="sidenav-options">
+                <a href="#" id="habit-manager-toggler">Habit Manager</a>
+                {this.renderHabitManager(habits, addHabit, updateHabit)}
+                <a href="#" id="goals-manager-toggler">Goals Manager</a>
+                {this.renderGoalsManager(goals, addGoal, updateGoal)}
+                <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
+                <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
+            </div>
+        )
+    }
+
+    renderHabitManager = (habits, addHabit, updateHabit) => {
+        return (
+            <UncontrolledCollapse toggler="#habit-manager-toggler" >
+                <br></br>
+                <Card className="sidenav-option-manager">
+                    <HabitContainer habits={habits} addHabit={addHabit} updateHabit={updateHabit}/>
+                </Card>
+                <br></br>
+            </UncontrolledCollapse>
+        )
+    }
+    
+    renderGoalsManager = (goals, addGoal, updateGoal) => {
+        return (
+            <UncontrolledCollapse toggler="#goals-manager-toggler" >
+                <br></br>
+                <Card className="sidenav-option-manager">
+                    <GoalContainer goals={goals} addGoal={addGoal} updateGoal={updateGoal}/>
+                </Card>
+                <br></br>
+            </UncontrolledCollapse>
+        )
+    }
+
+    renderLogout = () => {
+        return (
+            <Button onClick={() => {
+                localStorage.clear()
+                this.props.history.push('/')
+                }}>Log Out
+            </Button>
+        )
+    }
   
     render(){
-        let {user, token, goals, habits} = this.props
+        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal} = this.props
         return(
             <div className="sidenav-container">
-                <div className="logo">
-                    <img src={logo} alt="Fit-task-ic" />
-                </div>
-                <div className="user-info">
-                    <h3>- {user.name} | {user.age} | {user.location} -</h3>
-                </div>
-                <div className="sidenav-options">
-                    <a href="#" id="habit-manager-toggler" onClick={this.handleDisplayHabits}>Habit Manager</a>
-                    <UncontrolledCollapse toggler="#habit-manager-toggler" >
-                        <br></br>
-                        <Card className="sidenav-option-manager">
-                            <HabitContainer />
-                        </Card>
-                        <br></br>
-                  </UncontrolledCollapse>
-                    <a href="#" id="goals-manager-toggler">Goals Manager</a>
-                    <UncontrolledCollapse toggler="#goals-manager-toggler" >
-                        <br></br>
-                        <Card className="sidenav-option-manager">
-                            <GoalContainer />
-                        </Card>
-                        <br></br>
-                  </UncontrolledCollapse>
-                    <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
-                </div>
-                <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
-
+                {this.renderLogo()}
+                {this.renderUserInfo(user)}
+                {this.renderSidenavOptions(goals, habits, addHabit, updateHabit, addGoal, updateGoal)}
                 <br></br>
-                <Button onClick={() => {
-                    localStorage.clear()
-                    this.props.history.push('/')
-                    }}>Log Out
-                </Button>
+                {this.renderLogout()}
             </div>
         )}
     }
