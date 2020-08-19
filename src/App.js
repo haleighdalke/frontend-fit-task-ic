@@ -121,6 +121,7 @@ class App extends React.Component {
 //     User: <User/>  
     return (
     <div className="App">
+
       <Switch>
         <Route path="/" exact component={LandingPage}/>
         <Route path="/login" render={this.renderLogin}/>
@@ -128,6 +129,7 @@ class App extends React.Component {
         <Route path="/main" render={this.renderMainContent}/>
         <Route path="/donutchart" render={this.renderDonutChart}/>
       </Switch>
+
     </div>
   )};
 }

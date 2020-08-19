@@ -12,7 +12,8 @@ class User extends Component {
     }
 
     render() {
-        console.log(this.state.user.habits)
+        // console.log(this.state.user.habits)
+
         return (
             <div>
                 <h1>Name: {this.state.user.name}</h1>
