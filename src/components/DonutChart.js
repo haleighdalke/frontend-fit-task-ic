@@ -13,18 +13,30 @@ class DonutChart extends Component {
             datasets: [{
                 data: [10, 20, 30],
                 backgroundColor: [
-                    '#ff6384',
-                    '#36a2eb',
-                    '#cc65fe',
-                    '#ffce56'
+                    '#fff',
+                    '#66FCF1',
+                    '#45A29E'
                 ]
             }, {
-                data: [30, 20, 10]
+                data: [30, 20, 10],
+                backgroundColor: [
+                    '#66FCF1',
+                    '#45A29E',
+                    '#fff'
+                ]
+            },
+            {
+                data: [25, 20, 22],
+                backgroundColor: [
+                    '#45A29E',
+                    '#fff',
+                    '#66FCF1'
+                ]
             }],
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                'Exercise',
+                'Self-Care',
+                'Other'
             ]
         }
         let options = Chart.defaults.doughnut
