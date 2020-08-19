@@ -4,7 +4,7 @@ import EditHabit from '../components/EditHabit'
 import {Container, CardBody, Button, Form, Input, FormGroup, Row, Col, Label} from 'reactstrap'
 import { act } from '@testing-library/react';
 
-class HabitContainer extends Component {
+export default class HabitContainer extends Component {
     state = {
         habits: [],
         id: null, 
@@ -78,12 +78,31 @@ class HabitContainer extends Component {
         }) 
         .then(r => r.json())
         .then(json => {
-            this.setState({habits: [...this.state.habits, {
-                id: json.data.id,
-                activity: json.data.attributes.activity,
-                activity_type: json.data.attributes.activity_type
-            }]})
-        })
+            console.log(json)
+            let habits = this.state.habits.map(habit => {
+                if(habit.id === json.data.id){
+                    let newHabit = {
+                        id: json.data.id,
+                        activity: json.data.attributes.activity,
+                        activity_type: json.data.attributes.activity_type
+                    }
+                    return newHabit
+                }else{
+                    return habit
+                }
+            })
+            //update state and reset for forms
+            this.setState({
+                habits: habits,
+                activity: "",
+                activity_type: "",
+                habitAdd: true
+        })})
+            // this.setState({habits: [...this.state.habits, {
+            //     id: json.data.id,
+            //     activity: json.data.attributes.activity,
+            //     activity_type: json.data.attributes.activity_type
+            // }]})
     }
 
     updateHabit = (habit) => {
@@ -98,9 +117,15 @@ class HabitContainer extends Component {
         })
         .then(res => res.json())
         .then(json => {
+            console.log(json)
             let habits = this.state.habits.map(habit => {
-                if(habit.id === json.id){
-                    return json
+                if(habit.id === json.data.id){
+                    let newHabit = {
+                        id: json.data.id,
+                        activity: json.data.attributes.activity,
+                        activity_type: json.data.attributes.activity_type
+                    }
+                    return newHabit
                 }else{
                     return habit
                 }
@@ -152,5 +177,3 @@ class HabitContainer extends Component {
         );
     }
 }
-
-export default HabitContainer;

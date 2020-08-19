@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import User from './components/User';
 import HabitContainer from './containers/HabitContainer';
+import GoalContainer from './containers/HabitContainer';
 import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
@@ -117,7 +118,7 @@ class App extends React.Component {
 //     User: <User/>  
     return (
     <div className="App">
-
+      {/* <HabitContainer/> */}
       <Switch>
         <Route path="/" exact component={LandingPage}/>
         <Route path="/login" render={this.renderLogin}/>
