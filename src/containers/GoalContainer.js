@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Goal from '../components/Goal'
 import AddGoal from '../components/AddGoal'
-// import EditGoal from '../components/EditGoal'
+import EditGoal from '../components/EditGoal'
 
-class GoalContainer extends Component {
+export default class GoalContainer extends Component {
     state = {
         goals: [],
         id: null, 
@@ -58,16 +58,23 @@ class GoalContainer extends Component {
             },
             body: JSON.stringify(goal)
         }) 
+        .then(r => r.json())
+        .then(json => {
+            this.setState({habits: [...this.state.goals.slice(0, json.id - 1), json, ...this.state.habits.slice(json.id, this.state.goals.length) ]})
+        })
     }
 
-    deleteGoal = (goal) => {
+    deleteGoal = (e, goal) => {
         fetch(`http://localhost:3000/goals/${goal.id}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
+                'Content-Type': 'application/json'
+            }
         }) 
+        .then(r => r.json())
+        .then(json => {
+            this.setState({habits: [...this.state.goals.slice(0, json.id - 1), ...this.state.habits.slice(json.id, this.state.goals.length) ]})
+        })
     }
 
     render() {
@@ -81,5 +88,3 @@ class GoalContainer extends Component {
         );
     }
 }
-
-export default GoalContainer;

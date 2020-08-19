@@ -3,7 +3,7 @@ import Habit from '../components/Habit'
 import AddEditHabit from '../components/AddEditHabit'
 import EditHabit from '../components/EditHabit'
 
-class HabitContainer extends Component {
+export default class HabitContainer extends Component {
     state = {
         habits: [],
         id: null, 
@@ -21,7 +21,7 @@ class HabitContainer extends Component {
 
     generateAllHabits = () => {
         return this.state.habits.map((habit, index) => {
-            return <Habit key={index} habit={habit} editHabit={this.editHabit} updateHabit={this.updateHabit}/>
+            return <Habit key={index} habit={habit} editHabit={this.editHabit} updateHabit={this.updateHabit} />
         })
     }
 
@@ -49,15 +49,18 @@ class HabitContainer extends Component {
     }
 
     updateHabit = (habit) => {
-        console.log(this.state.id)
         fetch(`http://localhost:3000/habits/${this.state.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
             },
-            body: JSON.stringify(habit)
+            body: JSON.stringify(habit),
         }) 
+        .then(r => r.json())
+        .then(json => {
+            this.setState({habits: [...this.state.habits.slice(0, json.id - 1), json, ...this.state.habits.slice(json.id, this.state.habits.length) ]})
+        })
     }
 
     render() {
@@ -70,5 +73,3 @@ class HabitContainer extends Component {
         );
     }
 }
-
-export default HabitContainer;
