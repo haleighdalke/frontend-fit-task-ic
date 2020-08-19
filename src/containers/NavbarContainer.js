@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Container, Button } from 'reactstrap';
 import logo from '../assets/img/fit-task-ic-logo6.png'
 import AccomplishmentsPopUp from './AccomplishmentsPopUp'
+import HabitContainer from './HabitContainer';
 
 class NavbarContainer extends React.Component {
     state = {
@@ -38,6 +39,8 @@ class NavbarContainer extends React.Component {
                     localStorage.clear()
                     this.props.history.push('/')
                     }}>Log Out</Button>
+
+                {/* <HabitContainer /> */}
             </Container>
         )}
     }

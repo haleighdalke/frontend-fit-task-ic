@@ -47,10 +47,6 @@ class App extends React.Component {
     return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals} habits={this.state.habits}/>
   }
 
-  renderDonutChart = () => {
-    return <ChartContainer />
-  }
-
   handleAuthResponse = (json) => {
     if (json.user){
       localStorage.token = json.token
@@ -127,7 +123,6 @@ class App extends React.Component {
         <Route path="/login" render={this.renderLogin}/>
         <Route path="/signup" render={this.renderSignUp}/>
         <Route path="/main" render={this.renderMainContent}/>
-        <Route path="/donutchart" render={this.renderDonutChart}/>
       </Switch>
 
     </div>
