@@ -1,5 +1,6 @@
 import Chart from 'chart.js';
 import React, { Component } from "react";
+import { Container } from 'reactstrap';
 
 class DonutChart extends Component {
 
@@ -28,7 +29,7 @@ class DonutChart extends Component {
         }
         let options = Chart.defaults.doughnut
         console.log(options)
-        let ctx = document.getElementById('myChart').getContext('2d')
+        let ctx = document.getElementById('myChart')
         let myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',
             data: data,
@@ -39,9 +40,9 @@ class DonutChart extends Component {
 
     render(){
         return (
-            <div className="donut-chart">
-              <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
+            <Container>
+              <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+            </Container>
         )
     }
 }
