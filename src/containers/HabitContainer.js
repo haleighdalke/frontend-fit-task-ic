@@ -27,21 +27,6 @@ class HabitContainer extends Component {
     //     })
     // }
 
-    addHabit = (newHabit) => {
-        fetch(`http://localhost:3000/habits`, {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify(newHabit),
-        }) 
-        .then(r => r.json())
-        .then(json => {
-            this.setState({habits: [...this.state.habits, json]})
-        })
-    }
-
     // editHabit = (e, habit) => {
     //     fetch(`http://localhost:3000/habits/${habit.id}`)
     //     .then(r => r.json())
@@ -80,6 +65,25 @@ class HabitContainer extends Component {
             return <option id={habit.id} value={habit.id}>{habit.activity}</option>
         })
             
+    }
+
+    addHabit = (newHabit) => {
+        fetch(`http://localhost:3000/habits`, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify(newHabit),
+        }) 
+        .then(r => r.json())
+        .then(json => {
+            this.setState({habits: [...this.state.habits, {
+                id: json.data.id,
+                activity: json.data.attributes.activity,
+                activity_type: json.data.attributes.activity_type
+            }]})
+        })
     }
 
     updateHabit = (habit) => {
