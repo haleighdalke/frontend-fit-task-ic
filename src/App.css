@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  /* font-family: 'Karla', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -35,4 +37,66 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Side Navbar and Main Content */
+/* The sidebar menu */
+.sidenav-container {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 30%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black */
+  color: white;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  /* padding-left: 10px; */
+}
+
+/* The navigation menu links */
+.sidenav-container a {
+  padding: 6px 8px 6px 16px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav-container a:hover {
+  color: #111;
+  background-color: #66FCF1;
+}
+
+.logo {
+  max-width: auto;
+}
+
+/* Style page content */
+.chart-container {
+  height: 100%;
+  width: 70%; /* Remainder width of the sidebar */
+  margin-left: 30%; /* Same as the width of the sidebar */
+  position: fixed;
+  padding: 0px 10px;
+  background-color: #1F2833; /* Dark Grey */
+
+}
+
+/* Style donut chart */
+.donut-chart {
+  width: 75%;
+  margin: auto;
+  display: block;
+  padding: 25px 25px 25px 25px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

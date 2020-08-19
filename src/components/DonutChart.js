@@ -1,5 +1,6 @@
 import Chart from 'chart.js';
 import React, { Component } from "react";
+import { Container } from 'reactstrap';
 
 class DonutChart extends Component {
 
@@ -12,23 +13,35 @@ class DonutChart extends Component {
             datasets: [{
                 data: [10, 20, 30],
                 backgroundColor: [
-                    '#ff6384',
-                    '#36a2eb',
-                    '#cc65fe',
-                    '#ffce56'
+                    '#fff',
+                    '#66FCF1',
+                    '#45A29E'
                 ]
             }, {
-                data: [30, 20, 10]
+                data: [30, 20, 10],
+                backgroundColor: [
+                    '#66FCF1',
+                    '#45A29E',
+                    '#fff'
+                ]
+            },
+            {
+                data: [25, 20, 22],
+                backgroundColor: [
+                    '#45A29E',
+                    '#fff',
+                    '#66FCF1'
+                ]
             }],
             labels: [
-                'Red',
-                'Yellow',
-                'Blue'
+                'Exercise',
+                'Self-Care',
+                'Other'
             ]
         }
         let options = Chart.defaults.doughnut
         console.log(options)
-        let ctx = document.getElementById('myChart').getContext('2d')
+        let ctx = document.getElementById('myChart')
         let myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',
             data: data,
@@ -39,9 +52,9 @@ class DonutChart extends Component {
 
     render(){
         return (
-            <div className="donut-chart">
-              <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
+            <Container className="donut-chart">
+              <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+            </Container>
         )
     }
 }
