@@ -34,11 +34,12 @@ export default class App extends React.Component {
 //     User: <User/>  
     return (
     <div className="App">
-      <BrowserRouter>
+      Habit Container: <HabitContainer/>
+      {/* <BrowserRouter>
         <Route path="/" exact component={LandingPage}/>
         <Route path="/login" render={this.renderLogin}/>
         <Route path="/signup" render={this.renderSignUp}/>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   )};
 }
