@@ -43,7 +43,7 @@ class HabitContainer extends Component {
     editHabit = (e, habit) => {
         fetch(`http://localhost:3000/habits/${habit.id}`)
         .then(r => r.json())
-        .then(json => {console.log(json.id)
+        .then(json => {
             this.setState({id: json.id, activity: json.activity, activity_type: json.activity_type})
         })
     }
