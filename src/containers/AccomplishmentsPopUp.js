@@ -4,8 +4,29 @@ import Button from 'react-bootstrap/Button'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import AddAccomplishmentForm from '../components/AddAccomplishmentForm';
+import ViewAccomplishments from '../components/ViewAccomplishments';
 
 class AccomplishmentsPopUp extends React.Component {
+
+    renderGoals = () => {
+        return this.props.goals.map(goal => {
+            return <option key={goal.id} value={goal.id}>{`${this.setHabitActivity(goal.habit_id)} - ${goal.duration} ${goal.duration_type} ${goal.frequency}`}</option>
+        })
+    }
+
+    setHabitActivity = (id) => {
+        let activity
+        this.props.habits.map(habit => {
+            if (habit.id == id) {
+                activity = habit.activity
+            }
+        })
+        return activity 
+    }
+
+    handleOnChange = (e) => {
+        console.log(e.target.value)
+    }
 
     render(){
         return (
@@ -22,7 +43,14 @@ class AccomplishmentsPopUp extends React.Component {
                         </Modal.Body>
                     </Tab>
                     <Tab eventKey="view" title="View Progress">
-                        <h2>Hello</h2>
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                View Goal Progress
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <ViewAccomplishments goals={this.props.goals} habits={this.props.habits}/>
+                        </Modal.Body>
                     </Tab>
                     <Tab eventKey="contact" title="Contact" disabled>
                         <h3>Testing</h3>
