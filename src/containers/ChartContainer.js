@@ -5,8 +5,8 @@ import { Container } from "reactstrap";
 const ChartContainer = (props) => {
 
     return (
-      <Container>
-        <DonutChart props={props}/>
+        <Container className="chart-container">
+            <DonutChart props={props}/>
         </Container>
   );
 }

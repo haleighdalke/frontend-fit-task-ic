@@ -40,7 +40,7 @@ class DonutChart extends Component {
 
     render(){
         return (
-            <Container>
+            <Container className="donut-chart">
               <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
             </Container>
         )
