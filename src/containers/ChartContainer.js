@@ -5,9 +5,9 @@ import { Container } from "reactstrap";
 const ChartContainer = (props) => {
 
     return (
-        <Container className="chart-container">
+        <div className="chart-container">
             <DonutChart props={props}/>
-        </Container>
+        </div>
   );
 }
 

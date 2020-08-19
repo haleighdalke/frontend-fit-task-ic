@@ -19,7 +19,7 @@ class NavbarContainer extends React.Component {
     render(){
         let {user, token, goals, habits} = this.props
         return(
-            <Container className="sidenav-container">
+            <div className="sidenav-container">
                 <div className="logo">
                     <img src={logo} alt="Fit-task-ic" />
                 </div>
@@ -41,7 +41,7 @@ class NavbarContainer extends React.Component {
                     }}>Log Out</Button>
 
                 {/* <HabitContainer /> */}
-            </Container>
+            </div>
         )}
     }
 
