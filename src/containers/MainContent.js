@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import AccomplishmentsPopUp from './AccomplishmentsPopUp';
+import ChartContainer from './ChartContainer';
 
 class MainContent extends React.Component {
     state = {
@@ -27,6 +28,7 @@ class MainContent extends React.Component {
                 }}>Log Out</button>
             <Button variant="primary" onClick={this.setModalShow}>Add an Accomplishment</Button>
             <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
+            <ChartContainer/>
         </div>
     )}
 }

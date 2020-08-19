@@ -8,6 +8,7 @@ import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import ChartContainer from './containers/ChartContainer';
 
 class App extends React.Component {
 
@@ -44,6 +45,10 @@ class App extends React.Component {
 
   renderMainContent = () => {
     return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals} habits={this.state.habits}/>
+  }
+
+  renderDonutChart = () => {
+    return <ChartContainer />
   }
 
   handleAuthResponse = (json) => {
@@ -121,6 +126,7 @@ class App extends React.Component {
         <Route path="/login" render={this.renderLogin}/>
         <Route path="/signup" render={this.renderSignUp}/>
         <Route path="/main" render={this.renderMainContent}/>
+        <Route path="/donutchart" render={this.renderDonutChart}/>
       </Switch>
     </div>
   )};
