@@ -1,12 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Container, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import logo from '../assets/img/fit-task-ic-logo6.png'
 import AccomplishmentsPopUp from './AccomplishmentsPopUp'
 import HabitContainer from './HabitContainer';
 import { UncontrolledCollapse, CardBody, Card } from 'reactstrap';
 import GoalContainer from './GoalContainer'
-import Goal from '../components/Goal';
 
 class NavbarContainer extends React.Component {
     state = {
@@ -36,7 +35,8 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderSidenavOptions = (habits, goals, addHabit, addGoal, updateHabit, updateGoal) => {
+    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal) => {
+        console.log()
         return (
             <div className="sidenav-options">
                 <a href="#" id="habit-manager-toggler">Habit Manager</a>
@@ -60,7 +60,7 @@ class NavbarContainer extends React.Component {
             </UncontrolledCollapse>
         )
     }
-    
+
     renderGoalsManager = (goals, addGoal, updateGoal) => {
         return (
             <UncontrolledCollapse toggler="#goals-manager-toggler" >
@@ -89,7 +89,7 @@ class NavbarContainer extends React.Component {
             <div className="sidenav-container">
                 {this.renderLogo()}
                 {this.renderUserInfo(user)}
-                {this.renderSidenavOptions(goals, habits, addHabit, updateHabit, addGoal, updateGoal)}
+                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal)}
                 <br></br>
                 {this.renderLogout()}
             </div>

@@ -45,7 +45,6 @@ class App extends React.Component {
     }) 
     .then(r => r.json())
     .then(json => {
-        console.log(json)
         let habits = this.state.habits.map(habit => {
             if(habit.id === json.data.id){
                 let newHabit = {
@@ -73,13 +72,13 @@ class App extends React.Component {
 }
 
   addGoal = () => {
-    
+
   }
 
   // UPDATING METHODS
-  updateHabit = (habit) => {
+  updateHabit = (id, habit) => {
     // console.log(this.state.id)
-    fetch(`http://localhost:3000/habits/${this.state.id}`, {
+    fetch(`http://localhost:3000/habits/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -89,7 +88,7 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(json => {
-        console.log(json)
+      console.log(json)
         let habits = this.state.habits.map(habit => {
             if(habit.id === json.data.id){
                 let newHabit = {
@@ -135,11 +134,17 @@ class App extends React.Component {
               />
   }
 
+  getAllHabits = () => {
+    fetch('http://localhost:3000/habits')
+    .then(res => res.json())
+    .then(data => this.setState({habits: data}))
+  }
 
   // AUTHENTICATION
   handleAuthResponse = (json) => {
     if (json.user){
       localStorage.token = json.token
+      this.getAllHabits()
       this.setState({
         user: {
           id: json.user.data.attributes.id,
@@ -148,7 +153,6 @@ class App extends React.Component {
           location: json.user.data.attributes.location
         },
         goals: json.user.data.attributes.goals,
-        habits: json.user.data.attributes.habits,
         token: json.token
       }, () => this.props.history.push('/main'))
     }

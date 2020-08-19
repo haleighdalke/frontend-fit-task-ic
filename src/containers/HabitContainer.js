@@ -22,7 +22,7 @@ export default class HabitContainer extends Component {
             activity: this.state.activity,
             activity_type: this.state.activity_type
         }
-        this.state.habitAdd ? addHabit(habit) : updateHabit(habit)
+        this.state.habitAdd ? addHabit(habit) : updateHabit(this.state.id, habit)
         e.target.reset()
     }
 
@@ -47,7 +47,7 @@ export default class HabitContainer extends Component {
     }
 
     generateHabitDropdownOptions = (habits) => {
-        console.log(habits)
+        // console.log(habits)
         return habits.map(habit => {
             return <option id={habit.id} value={habit.id}>{habit.activity}</option>
         })
@@ -74,11 +74,11 @@ export default class HabitContainer extends Component {
                         </Col>
                     </Row>
                     
-                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value)}>
+                        <FormGroup onChange={(e) => this.autoFillForm(e.target.value, habits)}>
                             <Label for="edit-habit">(optional) edit a habit</Label>
                                 <Input type="select" name="selectMulti" id="edit-habit">
                                     <option value={"n/a"}>n/a</option>
-                                    {this.generateHabitDropdownOptions(habits)}
+                                    {habits ? this.generateHabitDropdownOptions(habits) : false}
                                 </Input>
                         </FormGroup>
                     
