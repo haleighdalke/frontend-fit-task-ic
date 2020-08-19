@@ -5,6 +5,8 @@ import logo from '../assets/img/fit-task-ic-logo6.png'
 import AccomplishmentsPopUp from './AccomplishmentsPopUp'
 import HabitContainer from './HabitContainer';
 import { UncontrolledCollapse, CardBody, Card } from 'reactstrap';
+import GoalContainer from './GoalContainer'
+import Goal from '../components/Goal';
 
 class NavbarContainer extends React.Component {
     state = {
@@ -31,12 +33,19 @@ class NavbarContainer extends React.Component {
                     <a href="#" id="habit-manager-toggler" onClick={this.handleDisplayHabits}>Habit Manager</a>
                     <UncontrolledCollapse toggler="#habit-manager-toggler" >
                         <br></br>
-                        <Card className="habit-manager">
+                        <Card className="sidenav-option-manager">
                             <HabitContainer />
                         </Card>
                         <br></br>
                   </UncontrolledCollapse>
                     <a href="#" id="goals-manager-toggler">Goals Manager</a>
+                    <UncontrolledCollapse toggler="#goals-manager-toggler" >
+                        <br></br>
+                        <Card className="sidenav-option-manager">
+                            <GoalContainer />
+                        </Card>
+                        <br></br>
+                  </UncontrolledCollapse>
                     <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
                 </div>
                 <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
@@ -47,8 +56,6 @@ class NavbarContainer extends React.Component {
                     this.props.history.push('/')
                     }}>Log Out
                 </Button>
-
-
             </div>
         )}
     }
