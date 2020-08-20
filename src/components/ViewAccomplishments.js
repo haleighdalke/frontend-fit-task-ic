@@ -74,9 +74,11 @@ class ViewAccomplishments extends React.Component {
 
     render(){
     return(
-        <div>
+        <div align={'center'}>
             <div className='button-div' align={'center'}>
                 <h4>{this.state.week ? `Week of ${this.state.week[0]} through ${this.state.week[6]}`: null}</h4>
+                <strong>Goal for the week: </strong>{this.state.week ? this.props.goal.duration * this.props.goal.frequency : null} total minutes<br/>
+                <strong>Accomplished this week: </strong>{this.state.week ? this.calculateAccomplishments() : null} minutes<br/><br/>
                 <Button onClick={this.previousWeek}>Previous Week</Button>
                 <Button onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
             </div>
