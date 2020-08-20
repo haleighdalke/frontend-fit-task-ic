@@ -6,7 +6,7 @@ import NavbarContainer from './NavbarContainer';
 class MainContent extends React.Component {
 
     render(){
-    let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, accomplishments, addAccomplishment} = this.props
+    let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, deleteGoal, accomplishments, addAccomplishment} = this.props
     return(
         <div className="container-fluid" className="main-content">
             <ChartContainer/>
@@ -20,7 +20,10 @@ class MainContent extends React.Component {
                 addGoal={addGoal} 
                 updateGoal={updateGoal}
                 accomplishments={accomplishments}
-                addAccomplishment={addAccomplishment}/>
+                addAccomplishment={addAccomplishment}
+                deleteGoal={deleteGoal}
+                />
+            
         </div>
     )}
 }
