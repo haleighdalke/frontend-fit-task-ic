@@ -143,3 +143,8 @@
   background-color: #111 !important;
   border-color: #66FCF1 !important;
 }
+
+.goals-submit {
+  margin-left: 5px;
+  margin-right: 5px;
+}

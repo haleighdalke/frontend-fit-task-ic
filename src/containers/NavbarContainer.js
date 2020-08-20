@@ -35,14 +35,13 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal, accomplishments, addAccomplishment) => {
-        console.log()
+    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal, user, deleteGoal, accomplishments, addAccomplishment) => {
         return (
             <div className="sidenav-options">
                 <a href="#" id="habit-manager-toggler">Habit Manager</a>
                 {this.renderHabitManager(habits, addHabit, updateHabit)}
                 <a href="#" id="goals-manager-toggler">Goals Manager</a>
-                {this.renderGoalsManager(goals, addGoal, updateGoal)}
+                {this.renderGoalsManager(habits, goals, addGoal, updateGoal, user, deleteGoal)}
                 <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
                 <AccomplishmentsPopUp 
                     show={this.state.modalShow} 
@@ -67,12 +66,12 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderGoalsManager = (goals, addGoal, updateGoal) => {
+    renderGoalsManager = (habits, goals, addGoal, updateGoal, user, deleteGoal) => {
         return (
             <UncontrolledCollapse toggler="#goals-manager-toggler" >
                 <br></br>
                 <Card className="sidenav-option-manager">
-                    <GoalContainer goals={goals} addGoal={addGoal} updateGoal={updateGoal}/>
+                    <GoalContainer habits={habits} goals={goals} addGoal={addGoal} updateGoal={updateGoal} user={user} deleteGoal={deleteGoal}/>
                 </Card>
                 <br></br>
             </UncontrolledCollapse>
@@ -90,12 +89,12 @@ class NavbarContainer extends React.Component {
     }
   
     render(){
-        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, accomplishments, addAccomplishment} = this.props
+        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, deleteGoal, accomplishments, addAccomplishment} = this.props
         return(
             <div className="sidenav-container">
                 {this.renderLogo()}
                 {this.renderUserInfo(user)}
-                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal, accomplishments, addAccomplishment)}
+                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal, user, deleteGoal, accomplishments, addAccomplishment)}
                 <br></br>
                 {this.renderLogout()}
             </div>

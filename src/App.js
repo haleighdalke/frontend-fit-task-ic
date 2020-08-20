@@ -63,13 +63,30 @@ class App extends React.Component {
     })
 }
 
-  addGoal = () => {
-
+  addGoal = (newGoal) => {
+    fetch(`http://localhost:3000/goals`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(newGoal),
+  }) 
+  .then(r => r.json())
+  .then(json => {
+      this.setState({
+        goals: [...this.state.goals, {
+          id: json.id,
+          frequency: json.frequency,
+          duration: json.duration,
+          duration_type: "min",
+          habit_id: json.habit_id
+    }]})
+  })
   }
 
   // UPDATING METHODS
   updateHabit = (id, habit) => {
-    // console.log(this.state.id)
     fetch(`http://localhost:3000/habits/${id}`, {
         method: 'PATCH',
         headers: {
@@ -97,8 +114,48 @@ class App extends React.Component {
     })})
 }
 
-  updateGoal = () => {}
+updateGoal = (id, goal) => {
+  fetch(`http://localhost:3000/goals/${id}`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(goal)
+  })
+  .then(res => res.json())
+  .then(json => {
+      let goals = this.state.goals.map(goal => {
+          if(goal.id === json.id){
+              let newGoal = {
+                id: json.id,
+                frequency: json.frequency,
+                duration: json.duration,
+                duration_type: json.duration_type,
+                habit_id: json.habit_id,
+                user_id: json.user_id
+              }
+              return newGoal
+          }else{
+              return goal
+          }
+      })
+      this.setState({
+          goals: goals
+  })})
+}
 
+  deleteGoal = (id, goal) => {
+    fetch(`http://localhost:3000/goals/${id}`, {method: 'DELETE'}) 
+    .then(r => r.json())
+    .then(json => {
+      console.log(json)
+      let goals = this.state.goals.filter(goal => goal.id !== id)
+      this.setState({
+        goals: goals
+      })
+    })
+  }
   // RENDER METHODS
   renderLogin = () => {
     return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
@@ -119,7 +176,9 @@ class App extends React.Component {
               addGoal={this.addGoal}
               updateGoal={this.updateGoal}
               accomplishments={this.state.accomplishments}
-              addAccomplishment={this.addAnAccomplishment}/>
+              addAccomplishment={this.addAnAccomplishment}
+              deleteGoal={this.deleteGoal}
+              />
   }
 
   getAllHabits = () => {
@@ -218,6 +277,7 @@ class App extends React.Component {
   render(){
 //     HabitContainer: <HabitContainer/>
 //     User: <User/>  
+    console.log(this.state.habits)
     return (
     <div className="App">
       {/* <HabitContainer/> */}
