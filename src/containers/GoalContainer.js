@@ -26,7 +26,7 @@ export default class GoalContainer extends Component {
             // persist to database
             if(this.state.goalAdd){
                 addGoal(goal)
-            } else if(!this.state.goalAdd && e.target.value === "Submit"){
+            } else if(!this.state.goalAdd && e.target.name === "submit"){
                 updateGoal(this.state.id, goal)
             } else {
                 deleteGoal(this.state.id, goal)
@@ -40,7 +40,7 @@ export default class GoalContainer extends Component {
                 goalAdd: true,
                 deleteButton: false
             })
-            e.target.reset()
+            e.target.parentElement.reset()
         }
         else{
             alert("Must include duration, frequency, and habit to create a new goal.")
@@ -112,7 +112,7 @@ export default class GoalContainer extends Component {
         let {habits, goals, addGoal, updateGoal, deleteGoal} = this.props
         return (
             <CardBody>
-                <Form onSubmit={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>
+                <Form>
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
@@ -144,8 +144,8 @@ export default class GoalContainer extends Component {
                             </Input>
                     </FormGroup>
                     
-                    <Button className="goals-submit">Submit</Button>
-                    {this.state.deleteButton ? <Button className="goals-submit">Delete</Button> : false}
+                    <Button name="submit" className="goals-submit" onClick={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>Submit</Button>
+                    {this.state.deleteButton ? <Button name="delete" className="goals-submit" onClick={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>Delete</Button> : false}
             </Form>
             </CardBody>
         );
