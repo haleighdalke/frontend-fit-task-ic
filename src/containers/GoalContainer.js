@@ -144,8 +144,8 @@ export default class GoalContainer extends Component {
                             </Input>
                     </FormGroup>
                     
-                    <Button>Submit</Button>
-                    {this.state.deleteButton ? <Button>Delete</Button> : false}
+                    <Button className="goals-submit">Submit</Button>
+                    {this.state.deleteButton ? <Button className="goals-submit">Delete</Button> : false}
             </Form>
             </CardBody>
         );
