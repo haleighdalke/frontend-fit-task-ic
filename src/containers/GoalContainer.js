@@ -8,10 +8,11 @@ export default class GoalContainer extends Component {
         duration: null,
         duration_type: "min",
         habit_id: null,
-        goalAdd: true
+        goalAdd: true,
+        deleteButton: false
     }
 
-    handleSubmit = (e, habits, addGoal, updateGoal) => {
+    handleSubmit = (e, habits, addGoal, updateGoal, deleteGoal) => {
         e.preventDefault()
         let {frequency, duration, duration_type, habit_id} = this.state
         if(frequency !== null && duration !== null && habit_id !== null){
@@ -22,13 +23,22 @@ export default class GoalContainer extends Component {
                 habit_id: parseInt(habit_id),
                 user_id: parseInt(this.props.user.id)
             }
-            this.state.goalAdd ? addGoal(goal) : updateGoal(this.state.id, goal)
+            // persist to database
+            if(this.state.goalAdd){
+                addGoal(goal)
+            } else if(!this.state.goalAdd && e.target.value === "Submit"){
+                updateGoal(this.state.id, goal)
+            } else {
+                deleteGoal(this.state.id, goal)
+            }
+            // reset state
             this.setState({
                 id: null, 
                 frequency: null,
                 duration: null,
                 habit_id: null,
-                goalAdd: true
+                goalAdd: true,
+                deleteButton: false
             })
             e.target.reset()
         }
@@ -45,16 +55,20 @@ export default class GoalContainer extends Component {
                 frequency: null,
                 duration: null,
                 habit_id: null,
-                goalAdd: true
+                goalAdd: true,
+                deleteButton: false
             })
         }else{
-            let goal = goals.find(goal => goal.id === parseInt(selectedValue))
+            // handle updating and render delete button
+
+            let foundGoal = goals.find(goal => goal.id === parseInt(selectedValue))
             this.setState({
-                id: goal.id, 
-                frequency: goal.frequency,
-                duration: goal.duration,
-                habit_id: goal.habit_id,
-                goalAdd: false
+                id: foundGoal.id, 
+                frequency: foundGoal.frequency,
+                duration: foundGoal.duration,
+                habit_id: foundGoal.habit_id,
+                goalAdd: false,
+                deleteButton: true
             })
         }
     }
@@ -66,10 +80,6 @@ export default class GoalContainer extends Component {
         })
     }
 
-    handleGoalDropdownChange = (e) => {
-        console.log("goal dropdown changed", e.target.value)
-    }
-
     handleHabitDropdownChange = (e) => {
         if(e.target.value !== "n/a"){
             this.setState({habit_id: parseInt(e.target.value)})
@@ -78,7 +88,12 @@ export default class GoalContainer extends Component {
 
     generateHabitDropdownOptions = (habits) => {
         return habits.map(habit => {
-            return <option id={habit.id} key={habit.id} value={habit.id}>{habit.activity}</option>
+            if(habit.id === this.state.habit_id){
+                return <option id={habit.id} key={habit.id} value={habit.id} selected>{habit.activity}</option>
+            }
+            else{
+                return <option id={habit.id} key={habit.id} value={habit.id}>{habit.activity}</option>
+            }
         })
     }
 
@@ -94,10 +109,10 @@ export default class GoalContainer extends Component {
     }
 
     render() {
-        let {habits, goals, addGoal, updateGoal} = this.props
+        let {habits, goals, addGoal, updateGoal, deleteGoal} = this.props
         return (
             <CardBody>
-                <Form onSubmit={(e) => this.handleSubmit(e, habits, addGoal, updateGoal)}>
+                <Form onSubmit={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
@@ -130,6 +145,7 @@ export default class GoalContainer extends Component {
                     </FormGroup>
                     
                     <Button>Submit</Button>
+                    {this.state.deleteButton ? <Button>Delete</Button> : false}
             </Form>
             </CardBody>
         );

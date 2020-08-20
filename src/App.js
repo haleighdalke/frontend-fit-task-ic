@@ -119,6 +119,7 @@ updateGoal = (id, goal) => {
       let goals = this.state.goals.map(goal => {
           if(goal.id === json.id){
               let newGoal = {
+                id: json.id,
                 frequency: json.frequency,
                 duration: json.duration,
                 duration_type: json.duration_type,
@@ -135,19 +136,17 @@ updateGoal = (id, goal) => {
   })})
 }
 
-  deleteGoal = (e, goal) => {
-    fetch(`http://localhost:3000/goals/${goal.id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }) 
+  deleteGoal = (id, goal) => {
+    fetch(`http://localhost:3000/goals/${id}`, {method: 'DELETE'}) 
     .then(r => r.json())
     .then(json => {
-        this.setState({habits: [...this.state.goals.slice(0, json.id - 1), ...this.state.habits.slice(json.id, this.state.goals.length) ]})
+      console.log(json)
+      let goals = this.state.goals.filter(goal => goal.id !== id)
+      this.setState({
+        goals: goals
+      })
     })
-}
-
+  }
   // RENDER METHODS
   renderLogin = () => {
     return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
@@ -167,6 +166,7 @@ updateGoal = (id, goal) => {
               updateHabit={this.updateHabit}
               addGoal={this.addGoal}
               updateGoal={this.updateGoal}
+              deleteGoal={this.deleteGoal}
               />
   }
 
