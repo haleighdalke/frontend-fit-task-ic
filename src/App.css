@@ -89,6 +89,14 @@
 
 /* Style donut chart */
 .donut-chart {
+  width: 400px;
+  margin: auto;
+  display: block;
+  padding: 25px 25px 25px 25px;
+}
+
+/* Style progress chart */
+.progress-chart {
   width: 75%;
   margin: auto;
   display: block;

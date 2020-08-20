@@ -16,7 +16,7 @@ class NavbarContainer extends React.Component {
     }
   
     render(){
-        let {user, token, goals, habits} = this.props
+        let {user, token, goals, habits, accomplishments, addAccomplishment} = this.props
         return(
             <Container className="sidenav-container">
                 <div className="logo">
@@ -32,7 +32,13 @@ class NavbarContainer extends React.Component {
                 </div>
                 <br></br>
                 <Button variant="primary" onClick={this.setModalShow}>Add an Accomplishment</Button>
-                <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
+                <AccomplishmentsPopUp 
+                    show={this.state.modalShow} 
+                    onHide={this.setModalShow} 
+                    goals={goals} 
+                    habits={habits} 
+                    accomplishments={accomplishments}
+                    addAccomplishment={addAccomplishment}/>
                 <br></br>
                 <Button onClick={() => {
                     localStorage.clear()

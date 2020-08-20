@@ -21,6 +21,7 @@ class App extends React.Component {
     },
     goals: null,
     habits: null,
+    accomplishments: null,
     token: ""
   }
 
@@ -44,7 +45,12 @@ class App extends React.Component {
   }
 
   renderMainContent = () => {
-    return <MainContent user={this.state.user} token={this.state.token} goals={this.state.goals} habits={this.state.habits}/>
+    return <MainContent user={this.state.user} 
+              token={this.state.token} 
+              goals={this.state.goals} 
+              habits={this.state.habits} 
+              accomplishments={this.state.accomplishments}
+              addAccomplishment={this.addAnAccomplishment}/>
   }
 
   renderDonutChart = () => {
@@ -63,6 +69,7 @@ class App extends React.Component {
         },
         goals: json.user.data.attributes.goals,
         habits: json.user.data.attributes.habits,
+        accomplishments: json.user.data.attributes.accomplishments,
         token: json.token
       }, () => this.props.history.push('/main'))
     }
@@ -116,6 +123,25 @@ class App extends React.Component {
       })
     }
 
+    addAnAccomplishment = (accomplishment) => {
+        fetch('http://localhost:3000/accomplishments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(accomplishment)
+        })
+        .then(res => res.json())
+        .then(json => {
+          if (!json.error){
+            this.setState({ accomplishments: [...this.state.accomplishments, json.data.attributes]})
+          } else {
+            alert(json.error)
+          }
+        })
+    }
+    
   render(){
 //     HabitContainer: <HabitContainer/>
 //     User: <User/>  
