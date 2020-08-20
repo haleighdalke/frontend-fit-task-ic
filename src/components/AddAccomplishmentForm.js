@@ -13,21 +13,14 @@ class AddAccomplishmentForm extends React.Component {
 
     handleSubmit = (e) =>{
         e.preventDefault()
-        fetch('http://localhost:3000/accomplishments', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(console.log)
+        this.props.addAccomplishment(this.state)
+        this.props.onHide()
+        alert('Way to go! Keep it up!')
     }
 
     renderGoals = () => {
         return this.props.goals.map(goal => {
-            return <option key={goal.id} value={goal.id}>{`${this.setHabitActivity(goal.habit_id)} - ${goal.duration} ${goal.duration_type} ${goal.frequency}`}</option>
+            return <option key={goal.id} value={goal.id}>{`${goal.duration} ${goal.duration_type} of ${this.setHabitActivity(goal.habit_id)} - ${goal.frequency}x per week`}</option>
         })
     }
 
@@ -41,8 +34,8 @@ class AddAccomplishmentForm extends React.Component {
     }
 
     setDurationType = (id) => {
-        this.props.goals.map(goal => {
-            if (goal.id == id) {
+        this.props.goals.forEach(goal => {
+            if (goal.id.toString() === id.toString()) {
                 this.setState({ duration_type: goal.duration_type})
             }
         })
@@ -50,8 +43,8 @@ class AddAccomplishmentForm extends React.Component {
 
     setHabitActivity = (id) => {
         let activity
-        this.props.habits.map(habit => {
-            if (habit.id == id) {
+        this.props.habits.forEach(habit => {
+            if (habit.id.toString() === id.toString()) {
                 activity = habit.activity
             }
         })
@@ -63,12 +56,12 @@ class AddAccomplishmentForm extends React.Component {
             <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="date">
                 <Form.Label>Date</Form.Label>
-                <Form.Control name='date' type="date" onChange={this.handleOnChange}/>
+                <Form.Control name='date' type="date" onChange={this.handleOnChange} max={new Date().toISOString().substring(0,10)}/>
             </Form.Group>
             <Form.Group controlId="goal">
                 <Form.Label>Select a Goal</Form.Label>
                 <Form.Control as="select" name='goal_id' onChange={this.handleOnChange} defaultValue="choose">
-                    <option disabled value="choose"> -- select an option -- </option>
+                    <option disabled value="choose"> -- select a goal -- </option>
                     {this.renderGoals()}
                 </Form.Control>
             </Form.Group>

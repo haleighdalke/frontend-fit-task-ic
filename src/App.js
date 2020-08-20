@@ -18,6 +18,7 @@ class App extends React.Component {
     },
     goals: null,
     habits: null,
+    accomplishments: null,
     token: ""
   }
 
@@ -109,7 +110,8 @@ class App extends React.Component {
               updateHabit={this.updateHabit}
               addGoal={this.addGoal}
               updateGoal={this.updateGoal}
-              />
+              accomplishments={this.state.accomplishments}
+              addAccomplishment={this.addAnAccomplishment}/>
   }
 
   getAllHabits = () => {
@@ -131,6 +133,8 @@ class App extends React.Component {
           location: json.user.data.attributes.location
         },
         goals: json.user.data.attributes.goals,
+        habits: json.user.data.attributes.habits,
+        accomplishments: json.user.data.attributes.accomplishments,
         token: json.token
       }, () => this.props.history.push('/main'))
     }
@@ -184,6 +188,24 @@ class App extends React.Component {
       })
     }
 
+    addAnAccomplishment = (accomplishment) => {
+        fetch('http://localhost:3000/accomplishments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(accomplishment)
+        })
+        .then(res => res.json())
+        .then(json => {
+          if (!json.error){
+            this.setState({ accomplishments: [...this.state.accomplishments, json.data.attributes]})
+          } else {
+            alert(json.error)
+          }
+        })
+    }
 
   render(){
 //     HabitContainer: <HabitContainer/>

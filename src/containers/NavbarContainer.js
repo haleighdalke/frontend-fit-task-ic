@@ -35,7 +35,7 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal) => {
+    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal, accomplishments, addAccomplishment) => {
         console.log()
         return (
             <div className="sidenav-options">
@@ -44,7 +44,13 @@ class NavbarContainer extends React.Component {
                 <a href="#" id="goals-manager-toggler">Goals Manager</a>
                 {this.renderGoalsManager(goals, addGoal, updateGoal)}
                 <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
-                <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
+                <AccomplishmentsPopUp 
+                    show={this.state.modalShow} 
+                    onHide={this.setModalShow} 
+                    goals={goals} 
+                    habits={habits} 
+                    accomplishments={accomplishments}
+                    addAccomplishment={addAccomplishment}/>
             </div>
         )
     }
@@ -84,12 +90,12 @@ class NavbarContainer extends React.Component {
     }
   
     render(){
-        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal} = this.props
+        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, accomplishments, addAccomplishment} = this.props
         return(
             <div className="sidenav-container">
                 {this.renderLogo()}
                 {this.renderUserInfo(user)}
-                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal)}
+                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal, accomplishments, addAccomplishment)}
                 <br></br>
                 {this.renderLogout()}
             </div>
