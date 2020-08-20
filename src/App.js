@@ -2,13 +2,10 @@ import React from 'react';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import User from './components/User';
-import HabitContainer from './containers/HabitContainer';
 import LandingPage from './containers/LandingPage';
 import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import ChartContainer from './containers/ChartContainer';
 
 class App extends React.Component {
 
@@ -36,6 +33,65 @@ class App extends React.Component {
       .then(json => this.handleAuthResponse(json))
   }
 }
+
+  // CREATING METHODS
+  addHabit = (newHabit) => {
+    fetch(`http://localhost:3000/habits`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(newHabit),
+    }) 
+    .then(r => r.json())
+    .then(json => {
+        this.setState({
+          habits: [...this.state.habits, {
+            id: json.id,
+            activity: json.activity,
+            activity_type: json.activity_type
+      }]})
+    })
+}
+
+  addGoal = () => {
+
+  }
+
+  // UPDATING METHODS
+  updateHabit = (id, habit) => {
+    // console.log(this.state.id)
+    fetch(`http://localhost:3000/habits/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: JSON.stringify(habit)
+    })
+    .then(res => res.json())
+    .then(json => {
+        let habits = this.state.habits.map(habit => {
+            if(habit.id === json.id){
+                let newHabit = {
+                    id: json.id,
+                    activity: json.activity,
+                    activity_type: json.activity_type
+                }
+                return newHabit
+            }else{
+                return habit
+            }
+        })
+        this.setState({
+            habits: habits
+    })})
+}
+
+  updateGoal = () => {}
+
+  // RENDER METHODS
   renderLogin = () => {
     return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
   }
@@ -45,21 +101,30 @@ class App extends React.Component {
   }
 
   renderMainContent = () => {
-    return <MainContent user={this.state.user} 
+    return <MainContent 
+              user={this.state.user} 
               token={this.state.token} 
               goals={this.state.goals} 
-              habits={this.state.habits} 
+              habits={this.state.habits}
+              addHabit={this.addHabit}
+              updateHabit={this.updateHabit}
+              addGoal={this.addGoal}
+              updateGoal={this.updateGoal}
               accomplishments={this.state.accomplishments}
               addAccomplishment={this.addAnAccomplishment}/>
   }
 
-  renderDonutChart = () => {
-    return <ChartContainer />
+  getAllHabits = () => {
+    fetch('http://localhost:3000/habits')
+    .then(res => res.json())
+    .then(data => this.setState({habits: data}))
   }
 
+  // AUTHENTICATION
   handleAuthResponse = (json) => {
     if (json.user){
       localStorage.token = json.token
+      this.getAllHabits()
       this.setState({
         user: {
           id: json.user.data.attributes.id,
@@ -141,19 +206,18 @@ class App extends React.Component {
           }
         })
     }
-    
+
   render(){
 //     HabitContainer: <HabitContainer/>
 //     User: <User/>  
     return (
     <div className="App">
-
+      {/* <HabitContainer/> */}
       <Switch>
         <Route path="/" exact component={LandingPage}/>
         <Route path="/login" render={this.renderLogin}/>
         <Route path="/signup" render={this.renderSignUp}/>
         <Route path="/main" render={this.renderMainContent}/>
-        <Route path="/donutchart" render={this.renderDonutChart}/>
       </Switch>
 
     </div>

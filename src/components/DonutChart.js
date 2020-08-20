@@ -8,15 +8,20 @@ class DonutChart extends Component {
         this.createChart()
     }
 
+    // data: array of accomplishment duration grouped by type
+    // backgroundColor: leave out for now
+    // labels: habit types
+
     createChart = () => {
         let data = {
             datasets: [{
-                data: [10, 20, 30],
+                data: [10, 20, 30], 
                 backgroundColor: [
-                    '#fff',
                     '#66FCF1',
-                    '#45A29E'
+                    '#45A29E',
+                    '#fff'
                 ]
+
             }, {
                 data: [30, 20, 10],
                 backgroundColor: [
@@ -40,7 +45,7 @@ class DonutChart extends Component {
             ]
         }
         let options = Chart.defaults.doughnut
-        console.log(options)
+        // console.log(options)
         let ctx = document.getElementById('myChart')
         let myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',

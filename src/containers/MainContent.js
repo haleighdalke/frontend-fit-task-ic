@@ -2,22 +2,26 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ChartContainer from './ChartContainer';
 import NavbarContainer from './NavbarContainer'; 
-import {Container} from 'reactstrap'
 
 class MainContent extends React.Component {
 
     render(){
-    let {user, token, goals, habits, accomplishments, addAccomplishment} = this.props
+    let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, accomplishments, addAccomplishment} = this.props
     return(
-        <Container className="main-content">
-            <NavbarContainer user={user} 
+        <div className="container-fluid" className="main-content">
+            <ChartContainer/>
+            <NavbarContainer 
+                user={user} 
                 token={token} 
                 goals={goals} 
                 habits={habits} 
+                addHabit={addHabit} 
+                updateHabit={updateHabit} 
+                addGoal={addGoal} 
+                updateGoal={updateGoal}
                 accomplishments={accomplishments}
                 addAccomplishment={addAccomplishment}/>
-            <ChartContainer/>
-        </Container>
+        </div>
     )}
 }
 

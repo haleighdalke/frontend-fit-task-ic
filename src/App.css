@@ -40,28 +40,40 @@
 }
 
 /* Side Navbar and Main Content */
+
+.main-content {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
 /* The sidebar menu */
 .sidenav-container {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 30%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
+  height: 100%; 
+  width: 30%;
+  flex-direction: row;
+  position: fixed;
+  /* Full-height: remove this if you want "auto" height */
+  /* width: 500px !important; Set the width of the sidebar */
+  /* position: fixed; Fixed Sidebar (stay in place on scroll) */
+  /* z-index: 1; Stay on top */
+  /* top: 0; Stay at the top */
+  /* left: 0; */
   background-color: #111; /* Black */
   color: white;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
-  /* padding-left: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 /* The navigation menu links */
 .sidenav-container a {
   padding: 6px 8px 6px 16px;
-  margin-left: 20px;
+  margin-left: 20px; 
   margin-right: 20px;
-  text-decoration: none;
-  font-size: 25px;
+  text-decoration: none !important;
+  font-size: 20px;
   color: #818181;
   display: block;
 }
@@ -74,17 +86,23 @@
 
 .logo {
   max-width: auto;
+  padding-bottom: 15px;
+}
+
+.user-info {
+  padding-bottom: 15px;
 }
 
 /* Style page content */
 .chart-container {
+  padding: 10px;
   height: 100%;
-  width: 70%; /* Remainder width of the sidebar */
-  margin-left: 30%; /* Same as the width of the sidebar */
+  width: 100%;
+  padding-left: 30%;
+  flex-direction: row;
   position: fixed;
-  padding: 0px 10px;
   background-color: #1F2833; /* Dark Grey */
-
+  align-items: center;
 }
 
 /* Style donut chart */
@@ -101,10 +119,27 @@
   margin: auto;
   display: block;
   padding: 25px 25px 25px 25px;
+  /* height: 500px; */
+  /* width: 75%; */
+  /* margin: auto; */
+  /* display: block; */
+  /* padding: 25px 25px 25px 25px; */
 }
+
+/* .donut-chart canvas{
+  max-height: 500px;
+  max-width: 500px;
+} */
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* Style forms in Navbar Container */
+
+.sidenav-option-manager {
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
 }
