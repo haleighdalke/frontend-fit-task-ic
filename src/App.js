@@ -45,30 +45,13 @@ class App extends React.Component {
     }) 
     .then(r => r.json())
     .then(json => {
-        let habits = this.state.habits.map(habit => {
-            if(habit.id === json.data.id){
-                let newHabit = {
-                    id: json.data.id,
-                    activity: json.data.attributes.activity,
-                    activity_type: json.data.attributes.activity_type
-                }
-                return newHabit
-            }else{
-                return habit
-            }
-        })
-        //update state and reset for forms
         this.setState({
-            habits: habits,
-            activity: "",
-            activity_type: "",
-            habitAdd: true
-    })})
-        // this.setState({habits: [...this.state.habits, {
-        //     id: json.data.id,
-        //     activity: json.data.attributes.activity,
-        //     activity_type: json.data.attributes.activity_type
-        // }]})
+          habits: [...this.state.habits, {
+            id: json.id,
+            activity: json.activity,
+            activity_type: json.activity_type
+      }]})
+    })
 }
 
   addGoal = () => {
@@ -88,25 +71,20 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(json => {
-      console.log(json)
         let habits = this.state.habits.map(habit => {
-            if(habit.id === json.data.id){
+            if(habit.id === json.id){
                 let newHabit = {
-                    id: json.data.id,
-                    activity: json.data.attributes.activity,
-                    activity_type: json.data.attributes.activity_type
+                    id: json.id,
+                    activity: json.activity,
+                    activity_type: json.activity_type
                 }
                 return newHabit
             }else{
                 return habit
             }
         })
-        //update state and reset for forms
         this.setState({
-            habits: habits,
-            activity: "",
-            activity_type: "",
-            habitAdd: true
+            habits: habits
     })})
 }
 

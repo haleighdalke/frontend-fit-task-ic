@@ -23,6 +23,12 @@ export default class HabitContainer extends Component {
             activity_type: this.state.activity_type
         }
         this.state.habitAdd ? addHabit(habit) : updateHabit(this.state.id, habit)
+        this.setState({
+            id: null,
+            activity: "",
+            activity_type: "",
+            habitAdd: true
+        })
         e.target.reset()
     }
 
