@@ -47,6 +47,7 @@ class ProgressChart extends React.Component {
 
         let options = {
             responsive: true,
+            maintainAspectRation: false,
             legend: {
                 position: 'top',
             },
@@ -68,10 +69,13 @@ class ProgressChart extends React.Component {
     }
 
     render(){
+        let style = {
+            position: 'relative',
+        }
         return(
-        <Container className="progress-chart">
-            <canvas id="progressChart" width={"100px"} height={"100px"}></canvas>
-        </Container>
+        <div className="progress-chart" style={style}>
+            <canvas id="progressChart"></canvas>
+        </div>
         )}
 }
 

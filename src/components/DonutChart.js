@@ -65,9 +65,14 @@ class DonutChart extends Component {
     }
 
     render(){
+        let style = {
+            position: 'relative',
+            height: '100vh',
+            width: '100vh'
+        }
         return (
-            <Container className="donut-chart">
-              <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+            <Container className="donut-chart" style={style}>
+                <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
             </Container>
         )
     }
