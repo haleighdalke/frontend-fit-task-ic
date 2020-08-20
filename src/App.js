@@ -277,7 +277,6 @@ updateGoal = (id, goal) => {
   render(){
 //     HabitContainer: <HabitContainer/>
 //     User: <User/>  
-    console.log(this.state.habits)
     return (
     <div className="App">
       {/* <HabitContainer/> */}
