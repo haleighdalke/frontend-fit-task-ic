@@ -7,6 +7,8 @@ import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
+import DonutChart from './components/DonutChart';
+
 class App extends React.Component {
 
   state = {
@@ -21,6 +23,12 @@ class App extends React.Component {
     accomplishments: null,
     token: ""
   }
+
+  // donutChart = () => {
+  //   return this.props.goals.map(goal => {
+  //       return <DonutChart goal={goal}/>
+  //   })
+  // }
 
   componentDidMount(){
     if(localStorage.token){

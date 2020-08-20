@@ -8,11 +8,14 @@ class DonutChart extends Component {
         this.createChart()
     }
 
-    // data: array of accomplishment duration grouped by type
-    // backgroundColor: leave out for now
-    // labels: habit types
+    /*
+    data: array of accomplishment duration grouped by type --> data array is accomplishment duration, each number is minutes 
+    backgroundColor: leave out for now
+    labels: habit types 
+    */
 
     createChart = () => {
+        console.log(this.props)
         let data = {
             datasets: [{
                 data: [10, 20, 30], 
@@ -21,7 +24,6 @@ class DonutChart extends Component {
                     '#45A29E',
                     '#fff'
                 ]
-
             }, {
                 data: [30, 20, 10],
                 backgroundColor: [
@@ -32,6 +34,13 @@ class DonutChart extends Component {
             },
             {
                 data: [25, 20, 22],
+                backgroundColor: [
+                    '#45A29E',
+                    '#fff',
+                    '#66FCF1'
+                ]
+            }, {
+                data: [28, 20, 15],
                 backgroundColor: [
                     '#45A29E',
                     '#fff',

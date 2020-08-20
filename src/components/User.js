@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class User extends Component {
     state = {user: []}
 
-    componentDidMount(){
-        fetch('http://localhost:3000/users/1')
+    componentDidMount(user){
+        fetch(`http://localhost:3000/users/${user.data.id}`)
         .then(r => r.json())
         .then(json => {
             this.setState({user: json.data.attributes})
