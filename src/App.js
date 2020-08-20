@@ -65,7 +65,6 @@ class App extends React.Component {
   }) 
   .then(r => r.json())
   .then(json => {
-    console.log(json)
       this.setState({
         goals: [...this.state.goals, {
           id: json.id,
@@ -79,7 +78,6 @@ class App extends React.Component {
 
   // UPDATING METHODS
   updateHabit = (id, habit) => {
-    // console.log(this.state.id)
     fetch(`http://localhost:3000/habits/${id}`, {
         method: 'PATCH',
         headers: {
@@ -107,7 +105,35 @@ class App extends React.Component {
     })})
 }
 
-  updateGoal = () => {}
+updateGoal = (id, goal) => {
+  fetch(`http://localhost:3000/goals/${id}`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(goal)
+  })
+  .then(res => res.json())
+  .then(json => {
+      let goals = this.state.goals.map(goal => {
+          if(goal.id === json.id){
+              let newGoal = {
+                frequency: json.frequency,
+                duration: json.duration,
+                duration_type: json.duration_type,
+                habit_id: json.habit_id,
+                user_id: json.user_id
+              }
+              return newGoal
+          }else{
+              return goal
+          }
+      })
+      this.setState({
+          goals: goals
+  })})
+}
 
   deleteGoal = (e, goal) => {
     fetch(`http://localhost:3000/goals/${goal.id}`, {
@@ -220,6 +246,7 @@ class App extends React.Component {
   render(){
 //     HabitContainer: <HabitContainer/>
 //     User: <User/>  
+    console.log(this.state.habits)
     return (
     <div className="App">
       {/* <HabitContainer/> */}

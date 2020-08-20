@@ -48,13 +48,13 @@ export default class GoalContainer extends Component {
                 goalAdd: true
             })
         }else{
-            let goal = goals.find(goal => goal.id == selectedValue)
+            let goal = goals.find(goal => goal.id === parseInt(selectedValue))
             this.setState({
-                id: null, 
-                frequency: null,
-                duration: null,
-                habit_id: null,
-                goalAdd: true
+                id: goal.id, 
+                frequency: goal.frequency,
+                duration: goal.duration,
+                habit_id: goal.habit_id,
+                goalAdd: false
             })
         }
     }
@@ -84,9 +84,11 @@ export default class GoalContainer extends Component {
 
     generateGoalDropdownOptions = (habits, goals) => {
         return goals.map(goal => {
-            let habit = habits.find(habit => habit.id === goal.habit_id)
-            if(habit){
-                return <option id={goal.id} key={goal.id} value={goal.id}>{habit.activity} for {goal.duration} min {goal.frequency} times per week</option>
+            if(habits){
+                let habit = habits.find(habit => habit.id === goal.habit_id)
+                if(habit){
+                    return <option id={goal.id} key={goal.id} value={goal.id}>{habit.activity} for {goal.duration} min {goal.frequency} times per week</option>
+                }
             }
         })
     }
@@ -119,7 +121,7 @@ export default class GoalContainer extends Component {
                             </Input>
                     </FormGroup>
 
-                    <FormGroup onChange={this.handleGoalDropdownChange}>
+                    <FormGroup onChange={(e) => this.autoFillForm(e.target.value, goals)}>
                         <Label for="edit-goal">(optional) edit a goal</Label>
                             <Input type="select" name="select" id="edit-goal">
                                 <option value={"n/a"}>n/a</option>

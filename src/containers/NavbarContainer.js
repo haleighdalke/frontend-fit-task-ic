@@ -36,7 +36,6 @@ class NavbarContainer extends React.Component {
     }
 
     renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal, user) => {
-        console.log()
         return (
             <div className="sidenav-options">
                 <a href="#" id="habit-manager-toggler">Habit Manager</a>
