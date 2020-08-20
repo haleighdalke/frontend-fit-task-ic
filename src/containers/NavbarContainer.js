@@ -35,14 +35,14 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal) => {
+    renderSidenavOptions = (habits, addHabit, updateHabit, goals, addGoal, updateGoal, user) => {
         console.log()
         return (
             <div className="sidenav-options">
                 <a href="#" id="habit-manager-toggler">Habit Manager</a>
                 {this.renderHabitManager(habits, addHabit, updateHabit)}
                 <a href="#" id="goals-manager-toggler">Goals Manager</a>
-                {this.renderGoalsManager(goals, addGoal, updateGoal)}
+                {this.renderGoalsManager(habits, goals, addGoal, updateGoal, user)}
                 <a href="#" onClick={this.setModalShow}>Accomplishment Manager</a>
                 <AccomplishmentsPopUp show={this.state.modalShow} onHide={this.setModalShow} goals={goals} habits={habits}/>
             </div>
@@ -61,12 +61,12 @@ class NavbarContainer extends React.Component {
         )
     }
 
-    renderGoalsManager = (goals, addGoal, updateGoal) => {
+    renderGoalsManager = (habits, goals, addGoal, updateGoal, user) => {
         return (
             <UncontrolledCollapse toggler="#goals-manager-toggler" >
                 <br></br>
                 <Card className="sidenav-option-manager">
-                    <GoalContainer goals={goals} addGoal={addGoal} updateGoal={updateGoal}/>
+                    <GoalContainer habits={habits} goals={goals} addGoal={addGoal} updateGoal={updateGoal} user_id={user.id}/>
                 </Card>
                 <br></br>
             </UncontrolledCollapse>
@@ -89,7 +89,7 @@ class NavbarContainer extends React.Component {
             <div className="sidenav-container">
                 {this.renderLogo()}
                 {this.renderUserInfo(user)}
-                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal)}
+                {this.renderSidenavOptions(habits, addHabit, updateHabit, goals, addGoal, updateGoal, user)}
                 <br></br>
                 {this.renderLogout()}
             </div>

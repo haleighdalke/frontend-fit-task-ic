@@ -90,7 +90,6 @@ export default class HabitContainer extends Component {
                     
                     <Button>Submit</Button>
             </Form> 
-                {/* <EditHabit editHabit={this.editHabit} updateHabit={this.updateHabit} id={this.state.id} activity={this.state.activity} activity_type={this.state.activity_type}/> */}
             </CardBody>
         );
     }

@@ -54,8 +54,27 @@ class App extends React.Component {
     })
 }
 
-  addGoal = () => {
-
+  addGoal = (newGoal) => {
+    fetch(`http://localhost:3000/goals`, {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+      },
+      body: JSON.stringify(newGoal),
+  }) 
+  .then(r => r.json())
+  .then(json => {
+    console.log(json)
+      this.setState({
+        goals: [...this.state.goals, {
+          id: json.id,
+          frequency: json.frequency,
+          duration: json.duration,
+          duration_type: "min",
+          habit_id: json.habit_id
+    }]})
+  })
   }
 
   // UPDATING METHODS
@@ -89,6 +108,19 @@ class App extends React.Component {
 }
 
   updateGoal = () => {}
+
+  deleteGoal = (e, goal) => {
+    fetch(`http://localhost:3000/goals/${goal.id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }) 
+    .then(r => r.json())
+    .then(json => {
+        this.setState({habits: [...this.state.goals.slice(0, json.id - 1), ...this.state.habits.slice(json.id, this.state.goals.length) ]})
+    })
+}
 
   // RENDER METHODS
   renderLogin = () => {
