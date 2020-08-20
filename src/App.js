@@ -11,6 +11,8 @@ import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import ChartContainer from './containers/ChartContainer';
 
+import DonutChart from './components/DonutChart';
+
 class App extends React.Component {
 
   state = {
@@ -24,6 +26,12 @@ class App extends React.Component {
     habits: null,
     token: ""
   }
+
+  // donutChart = () => {
+  //   return this.props.goals.map(goal => {
+  //       return <DonutChart goal={goal}/>
+  //   })
+  // }
 
   componentDidMount(){
     if(localStorage.token){
