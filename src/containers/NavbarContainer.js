@@ -66,7 +66,7 @@ class NavbarContainer extends React.Component {
             <UncontrolledCollapse toggler="#goals-manager-toggler" >
                 <br></br>
                 <Card className="sidenav-option-manager">
-                    <GoalContainer habits={habits} goals={goals} addGoal={addGoal} updateGoal={updateGoal} user_id={user.id}/>
+                    <GoalContainer habits={habits} goals={goals} addGoal={addGoal} updateGoal={updateGoal} user={user}/>
                 </Card>
                 <br></br>
             </UncontrolledCollapse>

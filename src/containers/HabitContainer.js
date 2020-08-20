@@ -55,7 +55,7 @@ export default class HabitContainer extends Component {
     generateHabitDropdownOptions = (habits) => {
         // console.log(habits)
         return habits.map(habit => {
-            return <option id={habit.id} value={habit.id}>{habit.activity}</option>
+            return <option id={habit.id} key={habit.id} value={habit.id}>{habit.activity}</option>
         })
     }
 

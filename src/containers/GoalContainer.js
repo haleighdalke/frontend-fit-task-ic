@@ -8,27 +8,19 @@ export default class GoalContainer extends Component {
         duration: null,
         duration_type: "min",
         habit_id: null,
-        user_id: this.props.user_id,
         goalAdd: true
-    }
-
-    // controlled form (add and update)
-    handleOnChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
     }
 
     handleSubmit = (e, habits, addGoal, updateGoal) => {
         e.preventDefault()
-        let {frequency, duration, duration_type, habit_id, user_id} = this.state
+        let {frequency, duration, duration_type, habit_id} = this.state
         if(frequency !== null && duration !== null && habit_id !== null){
             let goal = {
-                frequency: frequency,
-                duration: duration,
+                frequency: parseInt(frequency),
+                duration: parseInt(duration),
                 duration_type: duration_type,
-                habit_id: habit_id,
-                user_id: user_id
+                habit_id: parseInt(habit_id),
+                user_id: parseInt(this.props.user.id)
             }
             this.state.goalAdd ? addGoal(goal) : updateGoal(this.state.id, goal)
             this.setState({
@@ -67,14 +59,15 @@ export default class GoalContainer extends Component {
         }
     }
 
-    generateGoalDropdownOptions = (habits, goals) => {
-
-        return goals.map(goal => {
-            let habit = habits.find(habit => habit.id === goal.habit_id)
-            if(habit){
-                return <option id={goal.id} value={goal.id}>{habit.activity} for {goal.duration} min {goal.frequency} times per week</option>
-            }
+    // controlled form (add and update)
+    handleOnChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
         })
+    }
+
+    handleGoalDropdownChange = (e) => {
+        console.log("goal dropdown changed", e.target.value)
     }
 
     handleHabitDropdownChange = (e) => {
@@ -85,10 +78,18 @@ export default class GoalContainer extends Component {
 
     generateHabitDropdownOptions = (habits) => {
         return habits.map(habit => {
-            return <option id={habit.id} value={habit.id}>{habit.activity}</option>
+            return <option id={habit.id} key={habit.id} value={habit.id}>{habit.activity}</option>
         })
     }
 
+    generateGoalDropdownOptions = (habits, goals) => {
+        return goals.map(goal => {
+            let habit = habits.find(habit => habit.id === goal.habit_id)
+            if(habit){
+                return <option id={goal.id} key={goal.id} value={goal.id}>{habit.activity} for {goal.duration} min {goal.frequency} times per week</option>
+            }
+        })
+    }
 
     render() {
         let {habits, goals, addGoal, updateGoal} = this.props
@@ -99,13 +100,13 @@ export default class GoalContainer extends Component {
                         <Col md={4}>
                             <FormGroup>
                                 {/* <Label for="duration">New Duration:</Label> */}
-                                <Input type="number" name="duration" id="duration" placeholder="Duration" value={this.state.duration} onChange={this.handleOnChange}/>min
+                                <Input type="number" name="duration" id="duration" placeholder="Duration" value={this.state.duration ? this.state.duration : ""} onChange={this.handleOnChange}/>min
                             </FormGroup>
                         </Col>
                         <Col md={8}>
                             <FormGroup>
                                 {/* <Label for="frequency">New Frequency:</Label> */}
-                                <Input type="number" name="frequency" id="frequency" placeholder="Frequency (per week)" value={this.state.frequency} onChange={this.handleOnChange}/>per week
+                                <Input type="number" name="frequency" id="frequency" placeholder="Frequency (per week)" value={this.state.frequency ? this.state.frequency : ""} onChange={this.handleOnChange}/>per week
                             </FormGroup>
                         </Col>
                     </Row>
