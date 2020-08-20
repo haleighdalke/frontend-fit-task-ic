@@ -167,6 +167,7 @@
   color: #fff;
   background-color: #111 !important;
   border-color: #66FCF1 !important;
+  padding: 20px !important;
 }
 
 .landing-page {
@@ -174,7 +175,7 @@
 }
 
 
-.goals-submit {
+.goals-submit, .login-button {
   margin-left: 5px;
   margin-right: 5px;
 }

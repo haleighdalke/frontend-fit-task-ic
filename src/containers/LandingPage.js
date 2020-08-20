@@ -11,8 +11,8 @@ const LandingPage = () => {
             <h1>FIT-TASK-IC</h1>
             <h3>Set your goals and keep yourself in check!</h3>
             <br />
-            <Button className="btn-round" onClick={() => history.push('/login')}>Login</Button>
-            <Button className="btn-round" onClick={() => history.push('/signup')}>Sign Up</Button>
+            <Button className="btn-round" className="login-button" onClick={() => history.push('/login')}>Login</Button>
+            <Button className="btn-round" className="login-button" onClick={() => history.push('/signup')}>Sign Up</Button>
         </Container>
       </div>
   );
