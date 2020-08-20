@@ -48,7 +48,7 @@ class AccomplishmentsPopUp extends React.Component {
     render(){
         let {goals, habits, accomplishments, addAccomplishment, show} = this.props
         return (
-            <Modal show={show} onHide={this.closeBox} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal className='my-modal' show={show} onHide={this.closeBox} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Tabs defaultActiveKey="add" id="uncontrolled-tab-example">
                     <Tab eventKey="add" title="Add New">
                         <Modal.Header>
@@ -76,7 +76,7 @@ class AccomplishmentsPopUp extends React.Component {
                     </Tab>
                 </Tabs>
                 <Modal.Footer>
-                    <Button onClick={this.closeBox}>Close</Button>
+                    <Button variant="secondary" onClick={this.closeBox}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );

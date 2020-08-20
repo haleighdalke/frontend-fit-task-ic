@@ -143,3 +143,31 @@
   background-color: #111 !important;
   border-color: #66FCF1 !important;
 }
+
+.my-modal .modal-content {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+}
+
+.my-modal a {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+}
+
+.my-modal a:hover {
+  color: #66FCF1;
+}
+
+.card-register {
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+}
+
+.landing-page {
+  color: #fff;
+}
