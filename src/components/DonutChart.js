@@ -13,8 +13,8 @@ class DonutChart extends Component {
     }
 
     componentDidUpdate(){
-        let myContainer = document.getElementById("donut-chart-container")
-        myContainer.innerHTML = ""
+        let container = document.querySelector('div.donut-chart')
+        container.innerHTML = '<canvas id="myChart" height="400px" width="400px"></canvas>'
         this.createChart()
     }
 
@@ -84,8 +84,8 @@ class DonutChart extends Component {
         }
 
         return (
-            <Container className="donut-chart" id="donut-chart-container" style={style}>
-                <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+            <Container className="donut-chart" style={style}>
+              <canvas id="myChart"></canvas>
             </Container>
         )
     }
