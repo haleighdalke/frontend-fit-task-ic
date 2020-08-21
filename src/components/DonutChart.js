@@ -18,7 +18,7 @@ class DonutChart extends Component {
         console.log(this.props)
         let data = {
             datasets: [{
-                data: [10, 20, 30], 
+                data: [10, 20, 0], 
                 backgroundColor: [
                     '#66FCF1',
                     '#45A29E',

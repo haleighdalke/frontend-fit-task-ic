@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 import logo from '../assets/img/fit-task-ic-logo6.png'
 import AccomplishmentsPopUp from './AccomplishmentsPopUp'
 import HabitContainer from './HabitContainer';
-import { UncontrolledCollapse, CardBody, Card } from 'reactstrap';
+import { UncontrolledCollapse, Card } from 'reactstrap';
 import GoalContainer from './GoalContainer'
 
 class NavbarContainer extends React.Component {
@@ -87,9 +87,9 @@ class NavbarContainer extends React.Component {
             </Button>
         )
     }
-  
+
     render(){
-        let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, deleteGoal, accomplishments, addAccomplishment} = this.props
+        let {user, goals, habits, addHabit, updateHabit, addGoal, updateGoal, deleteGoal, accomplishments, addAccomplishment} = this.props
         return(
             <div className="sidenav-container">
                 {this.renderLogo()}

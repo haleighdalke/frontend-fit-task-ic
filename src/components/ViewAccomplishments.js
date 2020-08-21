@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 class ViewAccomplishments extends React.Component {
 
     state = {
-        week: null,
+        week: [],
         daysFromToday: 0
     }
 
@@ -35,7 +35,6 @@ class ViewAccomplishments extends React.Component {
                     return day.getDate()
                 }
             }
-
             let dayString = `${day.getFullYear()}-${month()}-${dayNumber()}`
             week.push(dayString)
         }
@@ -66,23 +65,24 @@ class ViewAccomplishments extends React.Component {
         if (prevProps.goal !== this.props.goal) {
             this.setState({ daysFromToday: 0})
         }
+        
         if (prevState.daysFromToday !== this.state.daysFromToday) {
             this.setWeek()
         }
-
     }
 
     render(){
     return(
         <div align={'center'}>
             <div className='button-div' align={'center'}>
-                <h3>{this.state.week ? `Week of ${this.state.week[0]} through ${this.state.week[6]}`: null}</h3>
-                <strong>Goal for the week: </strong>{this.state.week ? this.props.goal.duration * this.props.goal.frequency : null} total minutes<br/>
-                <strong>Accomplished this week: </strong>{this.state.week ? this.calculateAccomplishments() : null} minutes<br/>
+                <h3>{`Week of ${this.state.week[0]} through ${this.state.week[6]}`}</h3>
+                <h4><strong>{Math.round(this.calculateAccomplishments()/(this.props.goal.duration * this.props.goal.frequency)*100)}% towards goal!</strong><br/></h4>
+                <strong>Goal for the week: </strong>{this.props.goal.duration * this.props.goal.frequency} total minutes<br/>
+                <strong>Accomplished this week: </strong>{this.calculateAccomplishments()} minutes<br/>
                 <Button variant="secondary" className="week-button" onClick={this.previousWeek}>Previous Week</Button>
                 <Button variant="secondary" className="week-button" onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
             </div>
-            {this.state.week ? <ProgressChart week={this.state.week} goal={this.props.goal.duration * this.props.goal.frequency} accomplished={this.calculateAccomplishments()}/> : null}
+            {<ProgressChart week={this.state.week} goal={this.props.goal.duration * this.props.goal.frequency} accomplished={this.calculateAccomplishments()}/>}
         </div>
         )
     }

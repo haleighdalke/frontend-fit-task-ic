@@ -60,7 +60,6 @@ export default class GoalContainer extends Component {
             })
         }else{
             // handle updating and render delete button
-
             let foundGoal = goals.find(goal => goal.id === parseInt(selectedValue))
             this.setState({
                 id: foundGoal.id, 
@@ -116,26 +115,22 @@ export default class GoalContainer extends Component {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                {/* <Label for="duration">New Duration:</Label> */}
                                 <Input type="number" name="duration" id="duration" placeholder="Duration" value={this.state.duration ? this.state.duration : ""} onChange={this.handleOnChange}/>min
                             </FormGroup>
                         </Col>
                         <Col md={8}>
                             <FormGroup>
-                                {/* <Label for="frequency">New Frequency:</Label> */}
                                 <Input type="number" name="frequency" id="frequency" placeholder="Frequency (per week)" value={this.state.frequency ? this.state.frequency : ""} onChange={this.handleOnChange}/>per week
                             </FormGroup>
                         </Col>
                     </Row>
                     
                     <FormGroup onChange={this.handleHabitDropdownChange}>
-                        {/* <Label for="edit-goal"></Label> */}
                             <Input type="select" name="select" id="edit-goal">
                                 <option value={"n/a"}>--select a habit--</option>
                                 {habits ? this.generateHabitDropdownOptions(habits) : false}
                             </Input>
                     </FormGroup>
-
                     <FormGroup onChange={(e) => this.autoFillForm(e.target.value, goals)}>
                         <Label for="edit-goal">(optional) edit a goal</Label>
                             <Input type="select" name="select" id="edit-goal">
@@ -143,7 +138,6 @@ export default class GoalContainer extends Component {
                                 {goals ? this.generateGoalDropdownOptions(habits, goals) : false}
                             </Input>
                     </FormGroup>
-                    
                     <Button name="submit" className="goals-submit" onClick={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>Submit</Button>
                     {this.state.deleteButton ? <Button name="delete" className="goals-submit" onClick={(e) => this.handleSubmit(e, habits, addGoal, updateGoal, deleteGoal)}>Delete</Button> : false}
             </Form>
