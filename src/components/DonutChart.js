@@ -8,83 +8,129 @@ class DonutChart extends Component {
         daysFromToday: 0
     }
 
-    componentDidMount(){
-        this.setWeek()
+    state = {
+        data: []
     }
 
-    /*
-    data: array of accomplishment duration grouped by type --> data array is accomplishment duration, each number is minutes 
-    backgroundColor: leave out for now
-    labels: habit types 
-    */
-    setWeek = () => {
-        let todayDate = new Date()
-        let newDate = todayDate.getDate() + this.state.daysFromToday
-        let date = new Date(todayDate.setDate(newDate))
-        let week = []
-        for (let i = 0; i <= 6; i++) {
-            let currentDate = date.getDate() - date.getDay() + i 
-            let day = new Date(date.setDate(currentDate))
-            const month = () => {
-                if (day.getMonth() + 1 < 10) {
-                    return `0${day.getMonth() + 1}`
-                } else {
-                    return day.getMonth() + 1
-                }
-            }
-            const dayNumber = () => {
-                if (day.getDate() < 10) {
-                    return `0${day.getDate()}`
-                } else {
-                    return day.getDate()
-                }
-            }
-            let dayString = `${day.getFullYear()}-${month()}-${dayNumber()}`
-            week.push(dayString)
-        }
-        this.setState({ week })
+    componentDidUpdate(){
+        this.createChart()
     }
+
+    // componentDidUpdate(){
+    //     this.createChart()
+    // }
+
     
-    show = () => {
-        console.log(this.state.week)
-        if(this.props.accomplishments){
-            this.props.accomplishments.forEach(acc => {
-                if (this.state.week.includes(acc.date)) {
-                    let data = {
-                        datasets: [{
-                            data: [acc.duration, 10, 30], 
-                            backgroundColor: [
-                                '#66FCF1',
-                                '#45A29E',
-                                '#fff'
-                            ]
-                        }],
-                        labels: [
-                            'Exercise',
-                            'Self-Care',
-                            'Other'
-                        ]
-                    }
-                    let options = Chart.defaults.doughnut
-                    // console.log(options)
-                    let ctx = document.getElementById('myChart')
-                    ctx.innerHTML = ''
-                    let myDoughnutChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: data,
-                        options: options
-                    })
-                    return myDoughnutChart
-                }
-            })
+    // data: array of accomplishment duration grouped by type --> data array is accomplishment duration, each number is minutes 
+    // backgroundColor: leave out for now
+    // labels: habit types 
+    
+
+    generateDataset = () => {
+        let {week, weeklyAccomplishments} = this.props
+        
+        let colorOptions = ["#66FCF1", "#45A29E", "#C5C6C7",  "#008081", "#4F97A3", "#81D8D0", "#7EF9FF", "#3FE0D0", "#B0DFE5", "#468284"]
+        let data = {
+            datasets: [], 
+            labels: []
         }
+
+        weeklyAccomplishments.forEach(day => {
+            // let dataset = {data: [], backgroundColor: []}
+
+            let types = Object.keys(day)
+            let values = Object.values(day)
+            let sumValues = values.map(value => {
+                return value.reduce(function(a, b){
+                    return a + b
+                }, 0)
+            })
+
+            if(sumValues.length > 0){
+                data.datasets = [...data.datasets, {
+                    data: sumValues,
+                    backgroundColor: colorOptions.slice(0, sumValues.length)
+                }]
+                
+                types.forEach(type => {
+                    if(!data.labels.includes(type)){
+                        data.labels = [...data.labels, type]
+                    }
+                })
+            }
+            
+            // return dataset
+        })
+        console.log(data)
+        return data
+    }
+
+    
+
+    createChart = () => {
+        let data = this.generateDataset()
+        // console.log(data)
+        // let data = {
+        //     datasets: [{
+        //         data: [10, 20, 30], 
+        //         backgroundColor: [
+        //             '#66FCF1',
+        //             '#45A29E',
+        //             '#fff'
+        //         ]
+        //     }, {
+        //         data: [30, 20, 10],
+        //         backgroundColor: [
+        //             '#66FCF1',
+        //             '#45A29E',
+        //             '#fff'
+        //         ]
+        //     },
+        //     {
+        //         data: [25, 20, 22],
+        //         backgroundColor: [
+        //             '#45A29E',
+        //             '#fff',
+        //             '#66FCF1'
+        //         ]
+        //     }, {
+        //         data: [28, 20, 15],
+        //         backgroundColor: [
+        //             '#45A29E',
+        //             '#fff',
+        //             '#66FCF1'
+        //         ]
+        //     }],
+        //     labels: [
+        //         'Exercise',
+        //         'Self-Care',
+        //         'Other'
+        //     ]
+        // }
+        let options = Chart.defaults.doughnut
+        // console.log(options)
+        let ctx = document.getElementById('myChart')
+        ctx.innerHTML = ""
+        let myDoughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: options
+        })
+        return myDoughnutChart
+
     }
 
     render(){
+        let style = {
+            position: 'relative',
+            height: '100vh',
+            width: '100vh'
+        }
         return (
-            <Container className="donut-chart">
-                {this.show()}
-                <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+
+            <Container className="donut-chart" style={style}>
+  
+             <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
             </Container>
         )
     }

@@ -95,7 +95,7 @@
 
 /* Style page content */
 .chart-container {
-  padding: 10px;
+  padding: 10px 10px 10px 10px;
   height: 100%;
   width: 100%;
   padding-left: 30%;
@@ -110,16 +110,16 @@
   width: 400px;
   margin: auto;
   display: block;
-  padding: 25px 25px 25px 25px;
+  /* padding: 25px 25px 25px 25px; */
 }
 
 /* Style progress chart */
-.progress-chart {
-  width: 75%;
+#progress-chart {
+  width: 50%;
   margin: auto;
   display: block;
   padding: 25px 25px 25px 25px;
-  /* height: 500px; */
+  height: 500px;
   /* width: 75%; */
   /* margin: auto; */
   /* display: block; */
@@ -138,8 +138,47 @@
 }
 
 /* Style forms in Navbar Container */
-
 .sidenav-option-manager {
   background-color: #111 !important;
   border-color: #66FCF1 !important;
+}
+
+/* Style modal for Accomplishment PopUp */
+.my-modal .modal-content {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+}
+
+.my-modal a {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+}
+
+.my-modal a:hover {
+  color: #66FCF1;
+}
+
+/* Style Login/Sign Up & LandingPages */
+.card-register {
+  color: #fff;
+  background-color: #111 !important;
+  border-color: #66FCF1 !important;
+  padding: 20px !important;
+}
+
+.landing-page {
+  color: #fff;
+}
+
+.goals-submit, .login-button, .week-button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.goal-select {
+  margin: 5px !important;
 }

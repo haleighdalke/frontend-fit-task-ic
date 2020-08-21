@@ -29,8 +29,8 @@ export default class LoginSignUp extends React.Component {
                 <Input name="age" placeholder="Age" type="number" onChange={this.handleOnChange}/><br/>
                 <label>Location </label>
                 <Input name="location" placeholder="Location" type="text" onChange={this.handleOnChange}/><br/><br/>
-                <Button block className="btn-round" color="danger" type="submit">Sign Up</Button>
-                <Button block className="btn-round" color="danger" onClick={() => window.location = "/"}>Go Back</Button>
+                <Button block className="btn-round" variant='secondary' type="submit">Sign Up</Button>
+                <Button block className="btn-round" variant='secondary' onClick={() => window.location = "/"}>Go Back</Button>
             </Form>
         )
     }
@@ -45,15 +45,15 @@ export default class LoginSignUp extends React.Component {
                 <Input name="name" placeholder="Name" type="text" onChange={this.handleOnChange}/><br/>
                 <label>Password </label>
                 <Input name="password" placeholder="Password" type="password" onChange={this.handleOnChange}/><br/><br/>
-                <Button block className="btn-round" color="danger">Login</Button>
-                <Button block className="btn-round" color="danger" onClick={() => window.location = "/"}>Go Back</Button>
+                <Button block className="btn-round" variant='secondary'>Login</Button>
+                <Button block className="btn-round" variant='secondary' onClick={() => window.location = "/"}>Go Back</Button>
             </Form>            
         )
     }
 
     render(){
         return(
-        <div className="page-header" style={{ backgroundImage: "url(" + require("../assets/img/run.jpg") + ")"}}>
+        <div className="page-header" style={{ backgroundImage: "url(" + require("../assets/img/run-black-background.jpg") + ")"}}>
             <Container>
                 <Col className="ml-auto mr-auto" lg="4">
                 <Card className="card-register ml-auto mr-auto">
