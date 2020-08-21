@@ -3,10 +3,9 @@ import DonutChart from '../components/DonutChart'
 import { Container } from "reactstrap";
 
 const ChartContainer = (props) => {
-
     return (
         <div className="chart-container">
-            <DonutChart props={props}/>
+            <DonutChart accomplishments={props.accomplishments} goals={props.goals}/>
         </div>
   );
 }
