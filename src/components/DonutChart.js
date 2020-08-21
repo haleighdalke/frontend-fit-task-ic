@@ -27,7 +27,8 @@ class DonutChart extends Component {
 
     generateDataset = () => {
         let {week, weeklyAccomplishments} = this.props
-        let colorOptions = ["#66FCF1", "#45A29E", "#C5C6C7",  "#008081", "#4F97A3", "#81D8D0", "#7EF9FF", "#3FE0D0", "#B0DFE5", "#468284"]
+        let colorOptions = ['#3FEEE6', '#55BCC9', '#97CAEF', '#CAFAFE', '#FC4445']
+        // ["#66FCF1", "#45A29E", "#C5C6C7",  "#008081", "#4F97A3", "#81D8D0", "#7EF9FF", "#3FE0D0", "#B0DFE5", "#468284"]
         let data = {
             datasets: [], 
             labels: []
