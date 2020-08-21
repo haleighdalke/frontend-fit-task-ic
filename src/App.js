@@ -1,13 +1,11 @@
 import React from 'react';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LandingPage from './containers/LandingPage';
+import NotFound from './containers/NotFound';
 import LoginSignUp from './components/LoginSignUp';
 import MainContent from './containers/MainContent';
 import { Switch, Route, withRouter } from 'react-router-dom';
-
-import DonutChart from './components/DonutChart';
 
 class App extends React.Component {
 
@@ -23,12 +21,6 @@ class App extends React.Component {
     accomplishments: [],
     token: ""
   }
-
-  // donutChart = () => {
-  //   return this.props.goals.map(goal => {
-  //       return <DonutChart goal={goal}/>
-  //   })
-  // }
 
   componentDidMount(){
     if(localStorage.token){
@@ -85,6 +77,24 @@ class App extends React.Component {
   })
   }
 
+  addAnAccomplishment = (accomplishment) => {
+    fetch('http://localhost:3000/accomplishments', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(accomplishment)
+    })
+    .then(res => res.json())
+    .then(json => {
+      if (!json.error){
+        this.setState({ accomplishments: [...this.state.accomplishments, json.data.attributes]})
+      } else {
+        alert(json.error)
+      }
+    })}
+    
   // UPDATING METHODS
   updateHabit = (id, habit) => {
     fetch(`http://localhost:3000/habits/${id}`, {
@@ -156,6 +166,7 @@ updateGoal = (id, goal) => {
       })
     })
   }
+
   // RENDER METHODS
   renderLogin = () => {
     return <LoginSignUp login={true} handleLogin={this.handleLogin}/>
@@ -255,38 +266,16 @@ updateGoal = (id, goal) => {
       })
     }
 
-    addAnAccomplishment = (accomplishment) => {
-        fetch('http://localhost:3000/accomplishments', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(accomplishment)
-        })
-        .then(res => res.json())
-        .then(json => {
-          if (!json.error){
-            this.setState({ accomplishments: [...this.state.accomplishments, json.data.attributes]})
-          } else {
-            alert(json.error)
-          }
-        })
-    }
-
   render(){
-//     HabitContainer: <HabitContainer/>
-//     User: <User/>  
     return (
     <div className="App">
-      {/* <HabitContainer/> */}
       <Switch>
         <Route path="/" exact component={LandingPage}/>
         <Route path="/login" render={this.renderLogin}/>
         <Route path="/signup" render={this.renderSignUp}/>
         <Route path="/main" render={this.renderMainContent}/>
+        <Route component={NotFound}/>
       </Switch>
-
     </div>
   )};
 }

@@ -14,7 +14,6 @@ class MainContent extends React.Component {
                 goals={goals} 
                 accomplishments={accomplishments}
                 />
-                
             <NavbarContainer 
                 user={user} 
                 token={token} 

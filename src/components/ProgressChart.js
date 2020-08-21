@@ -1,6 +1,5 @@
 import Chart from 'chart.js';
 import React from 'react';
-import { Container } from 'reactstrap';
 
 class ProgressChart extends React.Component {
 
@@ -60,6 +59,7 @@ class ProgressChart extends React.Component {
         }
 
         let ctx = document.getElementById('progressChart')
+        ctx.innerHTML = ""
         let myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',
             data: data,

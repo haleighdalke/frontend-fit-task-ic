@@ -66,12 +66,10 @@ class AddAccomplishmentForm extends React.Component {
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId="duration">
-                <Form.Label>Duration {this.state.duration_type ? `(in ${this.state.duration_type})` : null}</Form.Label>
+                <Form.Label>Duration (in min)</Form.Label>
                 <Form.Control name='duration' type="number" onChange={this.handleOnChange}/>
             </Form.Group>
-            <Button variant="secondary" type="submit">
-            Submit
-            </Button>
+            <Button variant="secondary" type="submit">Submit</Button>
             </Form>
         )
     }

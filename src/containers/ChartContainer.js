@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import DonutChart from '../components/DonutChart'
-import { Container } from "reactstrap";
 
 export default class ChartContainer extends Component {
     state = {

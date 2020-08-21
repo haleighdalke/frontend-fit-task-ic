@@ -53,7 +53,6 @@ export default class HabitContainer extends Component {
     }
 
     generateHabitDropdownOptions = (habits) => {
-        // console.log(habits)
         return habits.map(habit => {
             return <option id={habit.id} key={habit.id} value={habit.id}>{habit.activity}</option>
         })
@@ -68,13 +67,11 @@ export default class HabitContainer extends Component {
                     <Row form>
                         <Col md={6}>
                             <FormGroup>
-                                {/* <Label for="activity">New Activity:</Label> */}
                                 <Input type="text" name="activity" id="activity" placeholder="Activity" value={this.state.activity} onChange={this.handleOnChange}/>
                             </FormGroup>
                         </Col>
                         <Col md={6}>
                             <FormGroup>
-                                {/* <Label for="activity-type">New Activity Type:</Label> */}
                                 <Input type="text" name="activity_type" id="activity-type" placeholder="Activity Type" value={this.state.activity_type} onChange={this.handleOnChange}/>
                             </FormGroup>
                         </Col>
@@ -87,7 +84,6 @@ export default class HabitContainer extends Component {
                                     {habits ? this.generateHabitDropdownOptions(habits) : false}
                                 </Input>
                         </FormGroup>
-                    
                     <Button>Submit</Button>
             </Form> 
             </CardBody>
