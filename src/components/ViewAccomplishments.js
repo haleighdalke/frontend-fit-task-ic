@@ -76,11 +76,11 @@ class ViewAccomplishments extends React.Component {
     return(
         <div align={'center'}>
             <div className='button-div' align={'center'}>
-                <h4>{this.state.week ? `Week of ${this.state.week[0]} through ${this.state.week[6]}`: null}</h4>
+                <h3>{this.state.week ? `Week of ${this.state.week[0]} through ${this.state.week[6]}`: null}</h3>
                 <strong>Goal for the week: </strong>{this.state.week ? this.props.goal.duration * this.props.goal.frequency : null} total minutes<br/>
-                <strong>Accomplished this week: </strong>{this.state.week ? this.calculateAccomplishments() : null} minutes<br/><br/>
-                <Button variant="secondary" onClick={this.previousWeek}>Previous Week</Button>
-                <Button variant="secondary" onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
+                <strong>Accomplished this week: </strong>{this.state.week ? this.calculateAccomplishments() : null} minutes<br/>
+                <Button variant="secondary" className="week-button" onClick={this.previousWeek}>Previous Week</Button>
+                <Button variant="secondary" className="week-button" onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
             </div>
             {this.state.week ? <ProgressChart week={this.state.week} goal={this.props.goal.duration * this.props.goal.frequency} accomplished={this.calculateAccomplishments()}/> : null}
         </div>

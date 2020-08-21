@@ -64,7 +64,7 @@ class AccomplishmentsPopUp extends React.Component {
                         <Modal.Header>
                             <Modal.Title id="contained-modal-title-vcenter" align={'center'}>
                                 Select a Goal to View: 
-                                <select defaultValue="choose" onChange={this.handleOnChange}>
+                                <select className='goal-select' defaultValue="choose" onChange={this.handleOnChange}>
                                 <option disabled value="choose"> -- select a goal -- </option>
                                 {this.renderGoals()}
                                 </select>
