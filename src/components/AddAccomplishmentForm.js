@@ -53,7 +53,7 @@ class AddAccomplishmentForm extends React.Component {
 
     render(){
         return(
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit} className="accomplishment-form">
             <Form.Group controlId="date">
                 <Form.Label>Date</Form.Label>
                 <Form.Control name='date' type="date" onChange={this.handleOnChange} max={new Date().toISOString().substring(0,10)}/>
