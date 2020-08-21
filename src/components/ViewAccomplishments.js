@@ -72,15 +72,20 @@ class ViewAccomplishments extends React.Component {
     }
 
     render(){
+        let start = new Date(this.state.week[0])
+        let finish = new Date(this.state.week[6])
     return(
         <div align={'center'}>
             <div className='button-div' align={'center'}>
-                <h3>{`Week of ${this.state.week[0]} through ${this.state.week[6]}`}</h3>
+                <h3>{`Week of ${start.toDateString()} - ${finish.toDateString()}`}</h3>
+                <Button variant="secondary" className="week-button" onClick={this.previousWeek}>Previous Week</Button>
+                <Button variant="secondary" className="week-button" onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
+                <br></br>
+                <br></br>
                 <h4><strong>{Math.round(this.calculateAccomplishments()/(this.props.goal.duration * this.props.goal.frequency)*100)}% towards goal!</strong><br/></h4>
                 <strong>Goal for the week: </strong>{this.props.goal.duration * this.props.goal.frequency} total minutes<br/>
                 <strong>Accomplished this week: </strong>{this.calculateAccomplishments()} minutes<br/>
-                <Button variant="secondary" className="week-button" onClick={this.previousWeek}>Previous Week</Button>
-                <Button variant="secondary" className="week-button" onClick={this.nextWeek} disabled={this.state.daysFromToday === 0 ? true : false}>Next Week</Button>
+
             </div>
             {<ProgressChart week={this.state.week} goal={this.props.goal.duration * this.props.goal.frequency} accomplished={this.calculateAccomplishments()}/>}
         </div>
