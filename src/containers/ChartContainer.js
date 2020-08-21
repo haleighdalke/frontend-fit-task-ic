@@ -85,6 +85,13 @@ export default class ChartContainer extends Component {
             return false
         }
     }
+    //trying to add date
+    // date = () => {
+    //     this.state.week.map(day => {
+    //         let acc = this.props.accomplishments
+    //         return acc.filter(oneAcc => oneAcc.date === day)
+    //     })
+    // }
 
     // previousWeek = () => {
     //     let daysFromToday = this.state.daysFromToday - 7
