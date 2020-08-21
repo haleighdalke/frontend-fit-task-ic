@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import DonutChart from '../components/DonutChart'
 
-
 export default class ChartContainer extends Component {
     state = {
         week: [],
@@ -62,7 +61,6 @@ export default class ChartContainer extends Component {
         if (foundHabit) return foundHabit.activity_type
     }
 
-
     renderWeeklyAccomplishmentsByType = () => {
         if(this.props.accomplishments && this.state.week.length > 0 && this.props.habits.length > 0 && this.props.goals.length > 0){
             let acc = this.props.accomplishments
@@ -86,7 +84,6 @@ export default class ChartContainer extends Component {
         else{
             return false
         }
-        
     }
 
     // previousWeek = () => {
@@ -112,9 +109,7 @@ export default class ChartContainer extends Component {
         return (
             <div className="chart-container">
                 {this.renderWeeklyAccomplishmentsByType() ? <DonutChart week={this.state.week} weeklyAccomplishments={this.renderWeeklyAccomplishmentsByType()}/> : false}
-                
             </div>
-      );
+        );
     }
-    
 }
