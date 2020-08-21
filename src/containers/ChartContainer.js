@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DonutChart from '../components/DonutChart'
 
+
 export default class ChartContainer extends Component {
     state = {
         week: [],
@@ -60,6 +61,7 @@ export default class ChartContainer extends Component {
         let foundHabit = this.props.habits.filter(habit => habit.id == habit_id)[0]
         if (foundHabit) return foundHabit.activity_type
     }
+
 
     renderWeeklyAccomplishmentsByType = () => {
         if(this.props.accomplishments && this.state.week.length > 0 && this.props.habits.length > 0 && this.props.goals.length > 0){

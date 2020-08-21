@@ -218,6 +218,13 @@ updateGoal = (id, goal) => {
     }
   }
 
+  donutChart = () => {
+    return this.state.accomplishments.map(accomplishment => {
+        return <MainContent accomplishment={accomplishment}/>
+    })
+  }
+
+
   handleLogin = ({name, password}) => {
     let user = {
       name: name,

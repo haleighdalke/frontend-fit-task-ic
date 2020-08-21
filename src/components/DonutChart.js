@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import { Container } from 'reactstrap';
 
 class DonutChart extends Component {
+    state = {
+        week: null,
+        daysFromToday: 0
+    }
 
     state = {
         data: []
@@ -113,6 +117,7 @@ class DonutChart extends Component {
             options: options
         })
         return myDoughnutChart
+
     }
 
     render(){
@@ -122,8 +127,10 @@ class DonutChart extends Component {
             width: '100vh'
         }
         return (
+
             <Container className="donut-chart" style={style}>
-                <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
+  
+             <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
             </Container>
         )
     }
