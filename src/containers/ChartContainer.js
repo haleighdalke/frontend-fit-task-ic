@@ -41,16 +41,6 @@ export default class ChartContainer extends Component {
         this.setState({ week })
     }
 
-    // calculateAccomplishments = () => {
-    //     let sum = 0
-    //     this.props.accomplishments.forEach(acc => {
-    //         if (this.state.week.includes(acc.date)) {
-    //             sum += acc.duration
-    //         }
-    //     })
-    //     return sum
-    // }
-
     getGoalType = (goal_id) => {
         let foundGoal = this.props.goals.filter(goal => goal.id == goal_id)[0]
         return foundGoal ? this.getHabitType(foundGoal.habit_id) : false
@@ -85,32 +75,6 @@ export default class ChartContainer extends Component {
             return false
         }
     }
-    //trying to add date
-    // date = () => {
-    //     this.state.week.map(day => {
-    //         let acc = this.props.accomplishments
-    //         return acc.filter(oneAcc => oneAcc.date === day)
-    //     })
-    // }
-
-    // previousWeek = () => {
-    //     let daysFromToday = this.state.daysFromToday - 7
-    //     this.setState({ daysFromToday })
-    // }
-
-    // nextWeek = () => {
-    //     let daysFromToday = this.state.daysFromToday + 7
-    //     this.setState({ daysFromToday })
-    // }
-
-    // componentDidUpdate(prevProps, prevState){
-    //     if (prevProps.goal !== this.props.goal) {
-    //         this.setState({ daysFromToday: 0})
-    //     }
-    //     if (prevState.daysFromToday !== this.state.daysFromToday) {
-    //         this.setWeek()
-    //     }
-    // }
 
     render(){
         return (
