@@ -67,12 +67,12 @@ export default class HabitContainer extends Component {
                     <Row form>
                         <Col md={6}>
                             <FormGroup>
-                                <Input type="text" name="activity" id="activity" placeholder="Activity" value={this.state.activity} onChange={this.handleOnChange}/>
+                                <Input type="text" name="activity" id="activity" placeholder="activity" value={this.state.activity} onChange={this.handleOnChange}/>
                             </FormGroup>
                         </Col>
                         <Col md={6}>
                             <FormGroup>
-                                <Input type="text" name="activity_type" id="activity-type" placeholder="Activity Type" value={this.state.activity_type} onChange={this.handleOnChange}/>
+                                <Input type="text" name="activity_type" id="activity-type" placeholder="activity type" value={this.state.activity_type} onChange={this.handleOnChange}/>
                             </FormGroup>
                         </Col>
                     </Row>

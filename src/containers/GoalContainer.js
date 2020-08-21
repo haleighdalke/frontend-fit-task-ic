@@ -115,12 +115,12 @@ export default class GoalContainer extends Component {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Input type="number" name="duration" id="duration" placeholder="Duration" value={this.state.duration ? this.state.duration : ""} onChange={this.handleOnChange}/>min
+                                <Input type="number" name="duration" id="duration" placeholder="duration" value={this.state.duration ? this.state.duration : ""} onChange={this.handleOnChange}/>min
                             </FormGroup>
                         </Col>
                         <Col md={8}>
                             <FormGroup>
-                                <Input type="number" name="frequency" id="frequency" placeholder="Frequency (per week)" value={this.state.frequency ? this.state.frequency : ""} onChange={this.handleOnChange}/>per week
+                                <Input type="number" name="frequency" id="frequency" placeholder="frequency (per week)" value={this.state.frequency ? this.state.frequency : ""} onChange={this.handleOnChange}/>per week
                             </FormGroup>
                         </Col>
                     </Row>

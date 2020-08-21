@@ -20,7 +20,7 @@ class AddAccomplishmentForm extends React.Component {
 
     renderGoals = () => {
         return this.props.goals.map(goal => {
-            return <option key={goal.id} value={goal.id}>{`${goal.duration} ${goal.duration_type} of ${this.setHabitActivity(goal.habit_id)} - ${goal.frequency}x per week`}</option>
+            return <option key={goal.id} value={goal.id}>{`${this.setHabitActivity(goal.habit_id)} for ${goal.duration} ${goal.duration_type} - ${goal.frequency} times per week`}</option>
         })
     }
 
@@ -55,18 +55,18 @@ class AddAccomplishmentForm extends React.Component {
         return(
             <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="date">
-                <Form.Label>Date</Form.Label>
+                <Form.Label>date</Form.Label>
                 <Form.Control name='date' type="date" onChange={this.handleOnChange} max={new Date().toISOString().substring(0,10)}/>
             </Form.Group>
             <Form.Group controlId="goal">
-                <Form.Label>Select a Goal</Form.Label>
+                <Form.Label>select a goal</Form.Label>
                 <Form.Control as="select" name='goal_id' onChange={this.handleOnChange} defaultValue="choose">
                     <option disabled value="choose"> -- select a goal -- </option>
                     {this.renderGoals()}
                 </Form.Control>
             </Form.Group>
             <Form.Group controlId="duration">
-                <Form.Label>Duration (in min)</Form.Label>
+                <Form.Label>duration (in min)</Form.Label>
                 <Form.Control name='duration' type="number" onChange={this.handleOnChange}/>
             </Form.Group>
             <Button variant="secondary" type="submit">Submit</Button>
