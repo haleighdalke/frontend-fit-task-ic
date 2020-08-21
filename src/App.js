@@ -18,9 +18,9 @@ class App extends React.Component {
       age: "",
       location: ""
     },
-    goals: null,
-    habits: null,
-    accomplishments: null,
+    goals: [],
+    habits: [],
+    accomplishments: [],
     token: ""
   }
 

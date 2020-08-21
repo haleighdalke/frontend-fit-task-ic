@@ -9,7 +9,12 @@ class MainContent extends React.Component {
     let {user, token, goals, habits, addHabit, updateHabit, addGoal, updateGoal, deleteGoal, accomplishments, addAccomplishment} = this.props
     return(
         <div className="container-fluid" className="main-content">
-            <ChartContainer/>
+            <ChartContainer 
+                habits={habits} 
+                goals={goals} 
+                accomplishments={accomplishments}
+                />
+                
             <NavbarContainer 
                 user={user} 
                 token={token} 
