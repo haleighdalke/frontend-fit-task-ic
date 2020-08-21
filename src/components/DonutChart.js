@@ -13,6 +13,8 @@ class DonutChart extends Component {
     }
 
     componentDidUpdate(){
+        let myContainer = document.getElementById("donut-chart-container")
+        myContainer.innerHTML = ""
         this.createChart()
     }
 
@@ -63,48 +65,9 @@ class DonutChart extends Component {
 
     createChart = () => {
         let data = this.generateDataset()
-        // console.log(data)
-        // let data = {
-        //     datasets: [{
-        //         data: [10, 20, 30], 
-        //         backgroundColor: [
-        //             '#66FCF1',
-        //             '#45A29E',
-        //             '#fff'
-        //         ]
-        //     }, {
-        //         data: [30, 20, 10],
-        //         backgroundColor: [
-        //             '#66FCF1',
-        //             '#45A29E',
-        //             '#fff'
-        //         ]
-        //     },
-        //     {
-        //         data: [25, 20, 22],
-        //         backgroundColor: [
-        //             '#45A29E',
-        //             '#fff',
-        //             '#66FCF1'
-        //         ]
-        //     }, {
-        //         data: [28, 20, 15],
-        //         backgroundColor: [
-        //             '#45A29E',
-        //             '#fff',
-        //             '#66FCF1'
-        //         ]
-        //     }],
-        //     labels: [
-        //         'Exercise',
-        //         'Self-Care',
-        //         'Other'
-        //     ]
-        // }
         let options = Chart.defaults.doughnut
-        // console.log(options)
         let ctx = document.getElementById('myChart')
-        ctx.innerHTML = ""
+        // ctx.innerHTML = ""
         let myDoughnutChart = new Chart(ctx, {
             type: 'doughnut',
             data: data,
@@ -121,7 +84,7 @@ class DonutChart extends Component {
         }
 
         return (
-            <Container className="donut-chart" style={style}>
+            <Container className="donut-chart" id="donut-chart-container" style={style}>
                 <canvas id="myChart" width={"400px"} height={"400px"}></canvas>
             </Container>
         )
