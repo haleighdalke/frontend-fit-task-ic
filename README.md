@@ -27,9 +27,12 @@ those apps.
 
 # Instructions
 To run the app, follow these instructions: 
-1. $ cd /frontend-fit-task-ic
-2. $ npm install
-3. $ npm start
+1. In another terminal, $ cd /backend-fit-task-ic
+2. $ bundle install
+3. $ rails s --> to run Rails API server
+4. $ cd /frontend-fit-task-ic
+5. $ npm install
+6. $ npm start
 Now you should see the signup/login page. 
 
 # Overview on how to use
