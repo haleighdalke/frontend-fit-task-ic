@@ -15,7 +15,7 @@ class AccomplishmentsPopUp extends React.Component {
     renderGoals = () => {
         if (this.props.goals) {
         return this.props.goals.map(goal => {
-            return <option key={goal.id} value={goal.id}>{`${goal.duration} ${goal.duration_type} of ${this.setHabitActivity(goal.habit_id)} - ${goal.frequency}x per week`}</option>
+            return <option key={goal.id} value={goal.id}>{`${this.setHabitActivity(goal.habit_id)} for ${goal.duration} ${goal.duration_type} - ${goal.frequency} times per week`}</option>
         })
         }
     }

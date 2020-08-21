@@ -25,6 +25,8 @@ class ProgressChart extends React.Component {
 
     componentDidUpdate(prevProps, prevState){
         if (prevProps !== this.props) {
+            let container = document.querySelector('div.progress-chart')
+            container.innerHTML = '<canvas id="progressChart"></canvas>'
             this.createChart()
         }
     }
